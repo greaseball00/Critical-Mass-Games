@@ -1,0 +1,9 @@
+1:"$Sreact.fragment"
+2:I[47257,["/Critical-Mass-Games/_next/static/chunks/ff1a16fafef87110.js","/Critical-Mass-Games/_next/static/chunks/d2be314c3ece3fbe.js"],"ClientPageRoot"]
+3:I[6695,["/Critical-Mass-Games/_next/static/chunks/6b19af5275ac7db1.js","/Critical-Mass-Games/_next/static/chunks/d71bd075edafdd53.js","/Critical-Mass-Games/_next/static/chunks/39789d575e17123e.js","/Critical-Mass-Games/_next/static/chunks/cf58d9350de473cb.js"],"default"]
+6:I[97367,["/Critical-Mass-Games/_next/static/chunks/ff1a16fafef87110.js","/Critical-Mass-Games/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+0:{"buildId":"jNdAqqypWa-PFiPCt8zGx","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/Critical-Mass-Games/_next/static/chunks/39789d575e17123e.js","async":true}],["$","script","script-1",{"src":"/Critical-Mass-Games/_next/static/chunks/cf58d9350de473cb.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+4:{}
+5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
+8:null
