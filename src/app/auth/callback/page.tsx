@@ -15,11 +15,11 @@ function CallbackHandler() {
     called.current = true;
 
     const code = searchParams.get('code');
-    const next = searchParams.get('next') ?? '/Critical-Mass-Games/dashboard';
+    const next = searchParams.get('next') ?? '/dashboard';
 
     async function exchange() {
       if (!code) {
-        router.replace('/Critical-Mass-Games/auth/login?error=Missing+verification+code.');
+        router.replace('/auth/login?error=Missing+verification+code.');
         return;
       }
 
@@ -28,7 +28,7 @@ function CallbackHandler() {
 
       if (error) {
         router.replace(
-          `/Critical-Mass-Games/auth/login?error=${encodeURIComponent('Could not verify email. Try again.')}`,
+          `/auth/login?error=${encodeURIComponent('Could not verify email. Try again.')}`,
         );
       } else {
         router.replace(next);
