@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Eye, EyeOff, UserPlus, Check } from 'lucide-react';
+import SocialAuthButtons from '@/components/SocialAuthButtons';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -196,6 +197,8 @@ export default function SignupPage() {
                 <UserPlus size={16} /> {loading ? 'Creating account...' : 'Create Account'}
               </span>
             </button>
+
+            <SocialAuthButtons />
 
             <div style={{ textAlign: 'center', fontSize: '0.85rem', color: '#7ab87a' }}>
               Already have an account?{' '}

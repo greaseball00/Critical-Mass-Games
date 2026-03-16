@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
+import SocialAuthButtons from '@/components/SocialAuthButtons';
 
 function LoginForm() {
   const router = useRouter();
@@ -90,6 +91,8 @@ function LoginForm() {
           <LogIn size={16} /> {loading ? 'Authenticating...' : 'Log In'}
         </span>
       </button>
+
+      <SocialAuthButtons />
 
       <div style={{ textAlign: 'center', fontSize: '0.85rem', color: '#7ab87a' }}>
         No account yet?{' '}
