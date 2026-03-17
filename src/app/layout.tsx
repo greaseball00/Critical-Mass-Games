@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description:
     "Kennewick's premier gaming shop. Weekly events, dice & terrain shop, table booking, and community outreach across the Tri-Cities.",
   keywords: ['tabletop games', 'RPG', 'D&D', 'Kennewick', 'Tri-Cities', 'gaming shop', 'dice', 'terrain'],
+  icons: {
+    icon: '/logo.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
