@@ -23,11 +23,19 @@
   <!-- D20 outer decagon -->
   <polygon points="100,32 60,45 35,79 35,121 60,155 100,168 140,155 165,121 165,79 140,45" fill="#050a05" stroke="#39ff14" stroke-width="2.5" filter="url(#logo-glow)" />
 
-  <!-- D20 facets pentagon A -->
-  <polygon points="100,32 35,79 60,155 140,155 165,79" fill="none" stroke="#39ff14" stroke-width="1.5" filter="url(#logo-glow)" opacity="0.75" />
-
-  <!-- D20 facets pentagon B -->
-  <polygon points="60,45 35,121 100,168 165,121 140,45" fill="none" stroke="#39ff14" stroke-width="1.5" filter="url(#logo-glow)" opacity="0.75" />
+  <!-- D20 internal facets — 10 skip-2 chords -->
+  <g stroke="#39ff14" stroke-width="1.5" fill="none" filter="url(#logo-glow)" opacity="0.75">
+    <line x1="100" y1="32" x2="165" y2="79" />
+    <line x1="140" y1="45" x2="165" y2="121" />
+    <line x1="165" y1="79" x2="140" y2="155" />
+    <line x1="165" y1="121" x2="100" y2="168" />
+    <line x1="140" y1="155" x2="60" y2="155" />
+    <line x1="100" y1="168" x2="35" y2="121" />
+    <line x1="60" y1="155" x2="35" y2="79" />
+    <line x1="35" y1="121" x2="60" y2="45" />
+    <line x1="35" y1="79" x2="100" y2="32" />
+    <line x1="60" y1="45" x2="140" y2="45" />
+  </g>
 
   <!-- "20" text -->
   <text x="100" y="108" text-anchor="middle" fill="#39ff14" font-size="24" font-weight="bold" font-family="Courier New, monospace" filter="url(#logo-glow)">20</text>

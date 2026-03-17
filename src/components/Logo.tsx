@@ -66,17 +66,19 @@ export default function Logo({
         fill="#050a05" stroke="#39ff14" strokeWidth="2.5"
         filter="url(#logo-glow)" />
 
-      {/* D20 internal facets — pentagon A: v0-v2-v4-v6-v8 */}
-      <polygon
-        points="100,32 35,79 60,155 140,155 165,79"
-        fill="none" stroke="#39ff14" strokeWidth="1.5"
-        filter="url(#logo-glow)" opacity="0.75" />
-
-      {/* D20 internal facets — pentagon B: v1-v3-v5-v7-v9 */}
-      <polygon
-        points="60,45 35,121 100,168 165,121 140,45"
-        fill="none" stroke="#39ff14" strokeWidth="1.5"
-        filter="url(#logo-glow)" opacity="0.75" />
+      {/* D20 internal facets — 10 skip-2 chords (accurate icosahedron projection) */}
+      <g stroke="#39ff14" strokeWidth="1.5" fill="none" filter="url(#logo-glow)" opacity="0.75">
+        <line x1="100" y1="32" x2="165" y2="79" />
+        <line x1="140" y1="45" x2="165" y2="121" />
+        <line x1="165" y1="79" x2="140" y2="155" />
+        <line x1="165" y1="121" x2="100" y2="168" />
+        <line x1="140" y1="155" x2="60" y2="155" />
+        <line x1="100" y1="168" x2="35" y2="121" />
+        <line x1="60" y1="155" x2="35" y2="79" />
+        <line x1="35" y1="121" x2="60" y2="45" />
+        <line x1="35" y1="79" x2="100" y2="32" />
+        <line x1="60" y1="45" x2="140" y2="45" />
+      </g>
 
       {/* "20" center text */}
       <text
