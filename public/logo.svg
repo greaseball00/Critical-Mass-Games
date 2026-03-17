@@ -21,7 +21,7 @@
   <polygon points="144,168 139,180 149,180" fill="#39ff14" stroke="none" filter="url(#logo-glow)" transform="rotate(-150, 144, 176)" />
 
   <!-- D20 outer decagon -->
-  <polygon points="100,32 60,45 35,79 35,121 60,155 100,168 140,155 165,121 165,79 140,45" fill="#050a05" stroke="#39ff14" stroke-width="2.5" filter="url(#logo-glow)" />
+  <polygon points="100,32 60,45 35,79 35,121 60,155 100,168 140,155 165,121 165,79 140,45" fill="none" stroke="#39ff14" stroke-width="2.5" filter="url(#logo-glow)" />
 
   <!-- D20 internal facets — 10 skip-2 chords -->
   <g stroke="#39ff14" stroke-width="1.5" fill="none" filter="url(#logo-glow)" opacity="0.75">
@@ -36,7 +36,4 @@
     <line x1="35" y1="79" x2="100" y2="32" />
     <line x1="60" y1="45" x2="140" y2="45" />
   </g>
-
-  <!-- "20" text -->
-  <text x="100" y="108" text-anchor="middle" fill="#39ff14" font-size="24" font-weight="bold" font-family="Courier New, monospace" filter="url(#logo-glow)">20</text>
 </svg>

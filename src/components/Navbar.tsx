@@ -133,7 +133,7 @@ export default function Navbar() {
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '0.8'}
             ><TwitchIcon /></a>
-            <a href="https://discord.gg/PLACEHOLDER" target="_blank" rel="noopener noreferrer"
+            <a href="https://discord.gg/uUdfzTds" target="_blank" rel="noopener noreferrer"
               title="Discord" style={{ color: '#5865F2', opacity: 0.8, display: 'flex', alignItems: 'center', transition: 'opacity 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '0.8'}

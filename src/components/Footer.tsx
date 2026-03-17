@@ -112,7 +112,7 @@ export default function Footer() {
                 Twitch
               </a>
               <a
-                href="https://discord.gg/PLACEHOLDER"
+                href="https://discord.gg/uUdfzTds"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Join our Discord"

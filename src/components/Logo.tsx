@@ -60,10 +60,10 @@ export default function Logo({
         fill="#39ff14" stroke="none" filter="url(#logo-glow)"
         transform="rotate(-150, 144, 176)" />
 
-      {/* D20 outer decagon — dark fill renders over orbitals */}
+      {/* D20 outer decagon */}
       <polygon
         points="100,32 60,45 35,79 35,121 60,155 100,168 140,155 165,121 165,79 140,45"
-        fill="#050a05" stroke="#39ff14" strokeWidth="2.5"
+        fill="none" stroke="#39ff14" strokeWidth="2.5"
         filter="url(#logo-glow)" />
 
       {/* D20 internal facets — 10 skip-2 chords (accurate icosahedron projection) */}
@@ -80,18 +80,6 @@ export default function Logo({
         <line x1="60" y1="45" x2="140" y2="45" />
       </g>
 
-      {/* "20" center text */}
-      <text
-        x="100" y="108"
-        textAnchor="middle"
-        fill="#39ff14"
-        fontSize="24"
-        fontWeight="bold"
-        fontFamily="Courier New, monospace"
-        filter="url(#logo-glow)"
-      >
-        20
-      </text>
     </svg>
   );
 }
