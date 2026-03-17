@@ -88,6 +88,30 @@ export interface Database {
         Update: Record<string, never>;
         Relationships: [];
       };
+      posts: {
+        Row: {
+          id: string;
+          user_id: string;
+          title: string;
+          content: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          title: string;
+          content: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          title?: string;
+          content?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -100,3 +124,4 @@ export interface Database {
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type Booking = Database['public']['Tables']['bookings']['Row'];
 export type EventSignup = Database['public']['Tables']['event_signups']['Row'];
+export type Post = Database['public']['Tables']['posts']['Row'];

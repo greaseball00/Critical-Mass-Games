@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Calendar, ShoppingBag, Clock, Users, ChevronRight, Zap, Shield, Star } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 const upcomingEvents = [
   { day: 'MON', date: '17', title: "D&D Monday Night Meltdown", type: 'RPG', time: '6:00 PM', spots: 4 },
@@ -90,8 +91,8 @@ export default function HomePage() {
         ))}
 
         {/* Hazard symbol */}
-        <div className="float" style={{ fontSize: '5rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(57,255,20,0.6))' }}>
-          ☢
+        <div className="float" style={{ marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(57,255,20,0.6))' }}>
+          <Logo width={90} height={90} className="slow-spin" />
         </div>
 
         <div className="rad-badge" style={{ marginBottom: '1.5rem' }}>

@@ -128,3 +128,33 @@ create policy "Users can sign up for events"
 
 create policy "Users can remove their own event signups"
   on public.event_signups for delete using (auth.uid() = user_id);
+
+-- ============================================================
+-- POSTS
+-- Flat community message board
+-- ============================================================
+create table if not exists public.posts (
+  id         uuid default gen_random_uuid() primary key,
+  user_id    uuid references auth.users(id) on delete cascade not null,
+  title      text not null check (char_length(title) between 3 and 120),
+  content    text not null check (char_length(content) between 10 and 2000),
+  created_at timestamptz default now() not null,
+  updated_at timestamptz default now() not null
+);
+
+drop trigger if exists posts_updated_at on public.posts;
+create trigger posts_updated_at
+  before update on public.posts
+  for each row execute procedure public.handle_updated_at();
+
+-- Posts: public read, authenticated write, own delete
+alter table public.posts enable row level security;
+
+create policy "Posts are publicly readable"
+  on public.posts for select using (true);
+
+create policy "Authenticated users can post"
+  on public.posts for insert with check (auth.uid() = user_id);
+
+create policy "Users can delete their own posts"
+  on public.posts for delete using (auth.uid() = user_id);

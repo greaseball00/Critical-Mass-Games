@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 import SocialAuthButtons from '@/components/SocialAuthButtons';
+import Logo from '@/components/Logo';
 
 function LoginForm() {
   const router = useRouter();
@@ -110,7 +111,7 @@ export default function LoginPage() {
       <div style={{ width: '100%', maxWidth: '420px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }} className="slow-spin">☢</div>
+          <Logo width={64} height={64} className="slow-spin" style={{ marginBottom: '1rem' }} />
           <div className="rad-badge" style={{ marginBottom: '1rem' }}>Secure Access Terminal</div>
           <h1 style={{ color: '#39ff14', fontWeight: 900, fontSize: '1.8rem', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 15px rgba(57,255,20,0.5)' }}>
             Log In

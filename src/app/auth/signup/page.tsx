@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Eye, EyeOff, UserPlus, Check } from 'lucide-react';
 import SocialAuthButtons from '@/components/SocialAuthButtons';
+import Logo from '@/components/Logo';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function SignupPage() {
     return (
       <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem' }}>
         <div style={{ width: '100%', maxWidth: '420px', textAlign: 'center' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>☢</div>
+          <Logo width={64} height={64} style={{ marginBottom: '1rem' }} />
           <div className="panel glow-border" style={{ padding: '2.5rem' }}>
             <div style={{ width: '50px', height: '50px', background: 'rgba(57,255,20,0.1)', border: '2px solid #39ff14', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
               <Check size={24} style={{ color: '#39ff14' }} />
@@ -79,7 +80,7 @@ export default function SignupPage() {
       <div style={{ width: '100%', maxWidth: '440px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }} className="slow-spin">☢</div>
+          <Logo width={64} height={64} className="slow-spin" style={{ marginBottom: '1rem' }} />
           <div className="rad-badge" style={{ marginBottom: '1rem' }}>New Operative Registration</div>
           <h1 style={{ color: '#39ff14', fontWeight: 900, fontSize: '1.8rem', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 15px rgba(57,255,20,0.5)' }}>
             Join Up
