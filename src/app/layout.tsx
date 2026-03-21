@@ -39,11 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               letterSpacing: '0.15em',
               color: '#e8e6e3',
             }}>
-              <span style={{ color: '#bf40ff', marginRight: '8px' }}>✦</span>
+              <span style={{ color: '#39ff14', marginRight: '8px' }}>☢</span>
               <span style={{ color: '#39ff14', fontWeight: 700 }}>COMING SOON</span>
               <span style={{ color: '#8a8a9a', margin: '0 10px' }}>—</span>
               Critical Mass Games is gearing up. Stay tuned for our grand opening!
-              <span style={{ color: '#bf40ff', marginLeft: '8px' }}>✦</span>
+              <span style={{ color: '#39ff14', marginLeft: '8px' }}>☢</span>
             </div>
             <Navbar />
             <main>{children}</main>

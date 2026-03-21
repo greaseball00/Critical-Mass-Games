@@ -45,6 +45,7 @@ export default function HomePage() {
     <div>
       {/* Hero */}
       <section
+        className="scanlines"
         style={{
           minHeight: '92vh',
           display: 'flex',
@@ -77,9 +78,24 @@ export default function HomePage() {
           />
         ))}
 
-        {/* Logo */}
-        <div className="float" style={{ marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(191,64,255,0.6))' }}>
-          <Logo width={90} height={90} className="slow-spin" />
+        {/* Logo with radiation rings */}
+        <div style={{ position: 'relative', width: '90px', height: '90px', marginBottom: '1.5rem' }}>
+          {[0, 1.5, 3].map((delay) => (
+            <div
+              key={delay}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '50%',
+                border: '1px solid rgba(57,255,20,0.3)',
+                animation: `radiation-pulse 4.5s ease-out ${delay}s infinite`,
+                pointerEvents: 'none',
+              }}
+            />
+          ))}
+          <div className="float" style={{ filter: 'drop-shadow(0 0 20px rgba(191,64,255,0.6))' }}>
+            <Logo width={90} height={90} className="slow-spin" />
+          </div>
         </div>
 
         <div className="rad-badge" style={{ marginBottom: '1.5rem', borderColor: 'rgba(191,64,255,0.4)', color: '#bf40ff' }}>
@@ -177,7 +193,7 @@ export default function HomePage() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <div className="rad-badge" style={{ marginBottom: '0.75rem', borderColor: 'rgba(255,106,0,0.4)', color: '#ff6a00' }}>&#9889; This Week</div>
+              <div className="rad-badge" style={{ marginBottom: '0.75rem', borderColor: 'rgba(57,255,20,0.4)', color: '#39ff14' }}>&#9762; This Week</div>
               <h2 className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '1.8rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>
                 Upcoming Events
               </h2>

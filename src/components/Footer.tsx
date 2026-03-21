@@ -121,8 +121,8 @@ export default function Footer() {
           <p style={{ color: '#5a5a6a', fontSize: '0.7rem', letterSpacing: '1px', fontFamily: "'Orbitron', sans-serif" }}>
             &copy; 2025 CRITICAL MASS GAMES &#8212; KENNEWICK, WA &#8212; ALL RIGHTS RESERVED
           </p>
-          <div className="rad-badge pulse" style={{ borderColor: 'rgba(191,64,255,0.4)', color: '#bf40ff' }}>
-            &#10023; ARCANE LEVEL: LEGENDARY
+          <div className="rad-badge pulse" style={{ borderColor: 'rgba(57,255,20,0.4)', color: '#39ff14' }}>
+            &#9762; REACTOR LEVEL: CRITICAL
           </div>
         </div>
       </div>
