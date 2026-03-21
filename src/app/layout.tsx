@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/context/AuthContext';
+import ParticleBackground from '@/components/ParticleBackground';
 
 export const metadata: Metadata = {
   title: 'Critical Mass Games | Tri-Cities Gaming Hub',
@@ -17,11 +18,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
+        <ParticleBackground />
+        <div className="arcane-circle" />
         <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </div>
         </AuthProvider>
       </body>
     </html>

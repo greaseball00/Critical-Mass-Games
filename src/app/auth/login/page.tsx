@@ -40,21 +40,21 @@ function LoginForm() {
   return (
     <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
-        <label style={{ display: 'block', fontSize: '0.75rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
+        <label style={{ display: 'block', fontSize: '0.7rem', color: '#8a8a9a', letterSpacing: '1px', marginBottom: '0.4rem', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
           Email Address
         </label>
         <input
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          placeholder="operative@domain.com"
+          placeholder="adventurer@domain.com"
           required
           style={{ width: '100%', padding: '0.7rem 0.9rem', fontSize: '0.95rem' }}
         />
       </div>
 
       <div>
-        <label style={{ display: 'block', fontSize: '0.75rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
+        <label style={{ display: 'block', fontSize: '0.7rem', color: '#8a8a9a', letterSpacing: '1px', marginBottom: '0.4rem', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
           Password
         </label>
         <div style={{ position: 'relative' }}>
@@ -62,14 +62,14 @@ function LoginForm() {
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={e => setPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
             required
             style={{ width: '100%', padding: '0.7rem 2.5rem 0.7rem 0.9rem', fontSize: '0.95rem' }}
           />
           <button
             type="button"
             onClick={() => setShowPassword(v => !v)}
-            style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#7ab87a', cursor: 'pointer', padding: 0 }}
+            style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#8a8a9a', cursor: 'pointer', padding: 0 }}
           >
             {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
@@ -77,8 +77,8 @@ function LoginForm() {
       </div>
 
       {error && (
-        <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', padding: '0.75rem', color: '#ff8888', fontSize: '0.85rem' }}>
-          ⚠ {error}
+        <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', borderRadius: '8px', padding: '0.75rem', color: '#ff8888', fontSize: '0.85rem' }}>
+          &#9888; {error}
         </div>
       )}
 
@@ -95,9 +95,9 @@ function LoginForm() {
 
       <SocialAuthButtons />
 
-      <div style={{ textAlign: 'center', fontSize: '0.85rem', color: '#7ab87a' }}>
+      <div style={{ textAlign: 'center', fontSize: '0.85rem', color: '#8a8a9a' }}>
         No account yet?{' '}
-        <Link href="/auth/signup" style={{ color: '#39ff14', textDecoration: 'none' }}>
+        <Link href="/auth/signup" style={{ color: '#bf40ff', textDecoration: 'none' }}>
           Create one here
         </Link>
       </div>
@@ -112,23 +112,23 @@ export default function LoginPage() {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <Logo width={64} height={64} className="slow-spin" style={{ marginBottom: '1rem' }} />
-          <div className="rad-badge" style={{ marginBottom: '1rem' }}>Secure Access Terminal</div>
-          <h1 style={{ color: '#39ff14', fontWeight: 900, fontSize: '1.8rem', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 15px rgba(57,255,20,0.5)' }}>
+          <div className="rad-badge" style={{ marginBottom: '1rem', borderColor: 'rgba(191,64,255,0.4)', color: '#bf40ff' }}>Arcane Access Portal</div>
+          <h1 className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: '1.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Log In
           </h1>
-          <p style={{ color: '#7ab87a', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+          <p style={{ color: '#8a8a9a', fontSize: '0.9rem', marginTop: '0.5rem', fontStyle: 'italic' }}>
             Access your Critical Mass account
           </p>
         </div>
 
         {/* Card */}
-        <div className="panel glow-border" style={{ padding: '2rem' }}>
-          <Suspense fallback={<div style={{ color: '#7ab87a' }}>Loading...</div>}>
+        <div className="panel glow-border" style={{ padding: '2rem', borderRadius: '12px' }}>
+          <Suspense fallback={<div style={{ color: '#8a8a9a' }}>Loading...</div>}>
             <LoginForm />
           </Suspense>
         </div>
 
-        <p style={{ textAlign: 'center', color: '#4a6b4a', fontSize: '0.75rem', marginTop: '1.5rem', letterSpacing: '0.05em' }}>
+        <p style={{ textAlign: 'center', color: '#5a5a6a', fontSize: '0.7rem', marginTop: '1.5rem', letterSpacing: '0.5px', fontFamily: "'Orbitron', sans-serif" }}>
           Your account is protected by Supabase Auth
         </p>
       </div>

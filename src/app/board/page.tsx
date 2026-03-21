@@ -80,18 +80,18 @@ export default function BoardPage() {
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
         <div className="rad-badge" style={{ marginBottom: '0.75rem' }}>Community Comms</div>
-        <h1 style={{ color: '#39ff14', fontWeight: 900, fontSize: '2rem', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 15px rgba(57,255,20,0.5)', marginBottom: '0.5rem' }}>
+        <h1 className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: '2rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
           Message Board
         </h1>
-        <p style={{ color: '#7ab87a', fontSize: '0.9rem' }}>
+        <p style={{ color: '#8a8a9a', fontSize: '0.9rem' }}>
           Share game recaps, find players, or just say hi.
         </p>
       </div>
 
       {/* New post form */}
       {user ? (
-        <div className="panel glow-border" style={{ padding: '1.5rem', marginBottom: '2rem' }}>
-          <h2 style={{ color: '#39ff14', fontSize: '0.85rem', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+        <div className="panel glow-border" style={{ padding: '1.5rem', marginBottom: '2rem', borderRadius: '12px' }}>
+          <h2 style={{ color: '#bf40ff', fontFamily: "'Orbitron', sans-serif", fontSize: '0.85rem', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1rem' }}>
             New Post
           </h2>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -108,16 +108,16 @@ export default function BoardPage() {
             <textarea
               value={content}
               onChange={e => setContent(e.target.value)}
-              placeholder="What's on your mind? (10–2000 characters)"
+              placeholder="What's on your mind? (10-2000 characters)"
               required
               minLength={10}
               maxLength={2000}
               rows={4}
-              style={{ width: '100%', padding: '0.65rem 0.9rem', fontSize: '0.9rem', resize: 'vertical', fontFamily: 'Courier New, monospace', background: 'rgba(57,255,20,0.03)', border: '1px solid rgba(57,255,20,0.2)', color: '#c8f5c2' }}
+              style={{ width: '100%', padding: '0.65rem 0.9rem', fontSize: '0.9rem', resize: 'vertical', fontFamily: "'Cinzel', serif", background: 'rgba(191,64,255,0.03)', border: '1px solid rgba(191,64,255,0.2)', color: '#e8e6e3' }}
             />
             {formError && (
               <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', padding: '0.6rem', color: '#ff8888', fontSize: '0.85rem' }}>
-                ⚠ {formError}
+                {formError}
               </div>
             )}
             <button
@@ -133,10 +133,10 @@ export default function BoardPage() {
           </form>
         </div>
       ) : (
-        <div className="panel" style={{ padding: '1.25rem', marginBottom: '2rem', textAlign: 'center', color: '#7ab87a', fontSize: '0.9rem' }}>
-          <MessageSquare size={20} style={{ color: '#39ff14', marginBottom: '0.5rem' }} />
+        <div className="panel" style={{ padding: '1.25rem', marginBottom: '2rem', textAlign: 'center', color: '#8a8a9a', fontSize: '0.9rem', borderRadius: '12px' }}>
+          <MessageSquare size={20} style={{ color: '#bf40ff', marginBottom: '0.5rem' }} />
           <p>
-            <Link href="/auth/login" style={{ color: '#39ff14', textDecoration: 'none' }}>Log in</Link>{' '}
+            <Link href="/auth/login" style={{ color: '#bf40ff', textDecoration: 'none' }}>Log in</Link>{' '}
             to post a message.
           </p>
         </div>
@@ -144,30 +144,30 @@ export default function BoardPage() {
 
       {/* Post list */}
       {error && (
-        <div style={{ color: '#ff8888', fontSize: '0.85rem', marginBottom: '1rem' }}>⚠ {error}</div>
+        <div style={{ color: '#ff8888', fontSize: '0.85rem', marginBottom: '1rem' }}>{error}</div>
       )}
 
       {loadingPosts ? (
-        <div style={{ color: '#7ab87a', textAlign: 'center', padding: '3rem' }}>Loading posts...</div>
+        <div style={{ color: '#8a8a9a', textAlign: 'center', padding: '3rem' }}>Loading posts...</div>
       ) : posts.length === 0 ? (
-        <div className="panel" style={{ padding: '2.5rem', textAlign: 'center', color: '#4a6b4a' }}>
+        <div className="panel" style={{ padding: '2.5rem', textAlign: 'center', color: '#5a5a6a', borderRadius: '12px' }}>
           No posts yet. Be the first to say something.
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {posts.map(post => (
-            <div key={post.id} className="panel glow-border" style={{ padding: '1.25rem' }}>
+            <div key={post.id} className="panel glow-border" style={{ padding: '1.25rem', borderRadius: '12px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
                 <div style={{ flex: 1 }}>
-                  <h3 style={{ color: '#39ff14', fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.02em' }}>
+                  <h3 style={{ color: '#39ff14', fontFamily: "'Orbitron', sans-serif", fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.02em' }}>
                     {post.title}
                   </h3>
-                  <div style={{ fontSize: '0.75rem', color: '#4a6b4a', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
-                    <span style={{ color: '#7ab87a' }}>{displayName(post)}</span>
+                  <div style={{ fontSize: '0.75rem', color: '#5a5a6a', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
+                    <span style={{ color: '#bf40ff' }}>{displayName(post)}</span>
                     {' · '}
                     {formatDate(post.created_at)}
                   </div>
-                  <p style={{ color: '#c8f5c2', fontSize: '0.9rem', lineHeight: 1.65, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                  <p style={{ color: '#e8e6e3', fontSize: '0.9rem', lineHeight: 1.65, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                     {post.content}
                   </p>
                 </div>
@@ -175,9 +175,9 @@ export default function BoardPage() {
                   <button
                     onClick={() => handleDelete(post.id)}
                     title="Delete post"
-                    style={{ background: 'none', border: 'none', color: '#4a6b4a', cursor: 'pointer', padding: '0.25rem', flexShrink: 0, transition: 'color 0.2s' }}
+                    style={{ background: 'none', border: 'none', color: '#5a5a6a', cursor: 'pointer', padding: '0.25rem', flexShrink: 0, transition: 'color 0.2s' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#ff8888'}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#4a6b4a'}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#5a5a6a'}
                   >
                     <Trash2 size={15} />
                   </button>

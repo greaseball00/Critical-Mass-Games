@@ -55,15 +55,15 @@ export default function SignupPage() {
       <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem' }}>
         <div style={{ width: '100%', maxWidth: '420px', textAlign: 'center' }}>
           <Logo width={64} height={64} style={{ marginBottom: '1rem' }} />
-          <div className="panel glow-border" style={{ padding: '2.5rem' }}>
+          <div className="panel glow-border" style={{ padding: '2.5rem', borderRadius: '12px' }}>
             <div style={{ width: '50px', height: '50px', background: 'rgba(57,255,20,0.1)', border: '2px solid #39ff14', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
               <Check size={24} style={{ color: '#39ff14' }} />
             </div>
-            <h2 style={{ color: '#39ff14', fontWeight: 700, fontSize: '1.4rem', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>
+            <h2 className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 700, fontSize: '1.4rem', letterSpacing: '1px', marginBottom: '0.75rem' }}>
               Account Created!
             </h2>
-            <p style={{ color: '#7ab87a', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-              We&apos;ve sent a confirmation email to <strong style={{ color: '#c8f5c2' }}>{email}</strong>.
+            <p style={{ color: '#8a8a9a', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+              We&apos;ve sent a confirmation email to <strong style={{ color: '#e8e6e3' }}>{email}</strong>.
               Click the link to verify your account and you&apos;re ready to roll.
             </p>
             <Link href="/auth/login" className="btn-primary">
@@ -81,21 +81,21 @@ export default function SignupPage() {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <Logo width={64} height={64} className="slow-spin" style={{ marginBottom: '1rem' }} />
-          <div className="rad-badge" style={{ marginBottom: '1rem' }}>New Operative Registration</div>
-          <h1 style={{ color: '#39ff14', fontWeight: 900, fontSize: '1.8rem', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 15px rgba(57,255,20,0.5)' }}>
+          <div className="rad-badge" style={{ marginBottom: '1rem', borderColor: 'rgba(191,64,255,0.4)', color: '#bf40ff' }}>New Adventurer Registration</div>
+          <h1 className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: '1.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Join Up
           </h1>
-          <p style={{ color: '#7ab87a', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-            Create your Critical Mass account — it&apos;s free
+          <p style={{ color: '#8a8a9a', fontSize: '0.9rem', marginTop: '0.5rem', fontStyle: 'italic' }}>
+            Create your Critical Mass account &mdash; it&apos;s free
           </p>
         </div>
 
         {/* Card */}
-        <div className="panel glow-border" style={{ padding: '2rem' }}>
+        <div className="panel glow-border" style={{ padding: '2rem', borderRadius: '12px' }}>
           <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.7rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                <label style={{ display: 'block', fontSize: '0.65rem', color: '#8a8a9a', letterSpacing: '1px', marginBottom: '0.35rem', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
                   Full Name
                 </label>
                 <input
@@ -108,7 +108,7 @@ export default function SignupPage() {
                 />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.7rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                <label style={{ display: 'block', fontSize: '0.65rem', color: '#8a8a9a', letterSpacing: '1px', marginBottom: '0.35rem', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
                   Username
                 </label>
                 <input
@@ -125,21 +125,21 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.7rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+              <label style={{ display: 'block', fontSize: '0.65rem', color: '#8a8a9a', letterSpacing: '1px', marginBottom: '0.35rem', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
                 Email Address
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="operative@domain.com"
+                placeholder="adventurer@domain.com"
                 required
                 style={{ width: '100%', padding: '0.65rem 0.8rem', fontSize: '0.9rem' }}
               />
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.7rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+              <label style={{ display: 'block', fontSize: '0.65rem', color: '#8a8a9a', letterSpacing: '1px', marginBottom: '0.35rem', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
                 Password
               </label>
               <div style={{ position: 'relative' }}>
@@ -155,7 +155,7 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(v => !v)}
-                  style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#7ab87a', cursor: 'pointer', padding: 0 }}
+                  style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#8a8a9a', cursor: 'pointer', padding: 0 }}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -169,22 +169,23 @@ export default function SignupPage() {
                     style={{
                       flex: 1,
                       height: '3px',
+                      borderRadius: '2px',
                       background: password.length >= threshold
-                        ? i === 0 ? '#ff4444' : i === 1 ? '#ffd700' : '#39ff14'
-                        : 'rgba(57,255,20,0.1)',
+                        ? i === 0 ? '#ff6a00' : i === 1 ? '#bf40ff' : '#39ff14'
+                        : 'rgba(191,64,255,0.1)',
                       transition: 'background 0.3s',
                     }}
                   />
                 ))}
               </div>
-              <div style={{ fontSize: '0.7rem', color: '#4a6b4a', marginTop: '0.25rem' }}>
+              <div style={{ fontSize: '0.65rem', color: '#5a5a6a', marginTop: '0.25rem', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.5px' }}>
                 {password.length === 0 ? 'Enter a password' : password.length < 8 ? 'Too short' : password.length < 12 ? 'Decent' : password.length < 16 ? 'Strong' : 'Excellent'}
               </div>
             </div>
 
             {error && (
-              <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', padding: '0.75rem', color: '#ff8888', fontSize: '0.85rem' }}>
-                ⚠ {error}
+              <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', borderRadius: '8px', padding: '0.75rem', color: '#ff8888', fontSize: '0.85rem' }}>
+                &#9888; {error}
               </div>
             )}
 
@@ -201,16 +202,16 @@ export default function SignupPage() {
 
             <SocialAuthButtons />
 
-            <div style={{ textAlign: 'center', fontSize: '0.85rem', color: '#7ab87a' }}>
+            <div style={{ textAlign: 'center', fontSize: '0.85rem', color: '#8a8a9a' }}>
               Already have an account?{' '}
-              <Link href="/auth/login" style={{ color: '#39ff14', textDecoration: 'none' }}>
+              <Link href="/auth/login" style={{ color: '#bf40ff', textDecoration: 'none' }}>
                 Log in here
               </Link>
             </div>
           </form>
         </div>
 
-        <p style={{ textAlign: 'center', color: '#4a6b4a', fontSize: '0.75rem', marginTop: '1.5rem' }}>
+        <p style={{ textAlign: 'center', color: '#5a5a6a', fontSize: '0.75rem', marginTop: '1.5rem', fontStyle: 'italic' }}>
           By signing up you agree to keep it fun and treat everyone at the table with respect.
         </p>
       </div>

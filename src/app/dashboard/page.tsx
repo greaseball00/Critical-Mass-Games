@@ -108,7 +108,7 @@ export default function DashboardPage() {
   if (authLoading || loading) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-        <Loader2 size={32} style={{ color: '#39ff14' }} className="slow-spin" />
+        <Loader2 size={32} style={{ color: '#bf40ff' }} className="slow-spin" />
       </div>
     );
   }
@@ -126,8 +126,8 @@ export default function DashboardPage() {
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '3rem 1.5rem' }}>
       {/* Header */}
       <div style={{ marginBottom: '3rem' }}>
-        <div className="rad-badge" style={{ marginBottom: '1rem' }}>⚛ Command Center</div>
-        <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', fontWeight: 900, color: '#39ff14', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 20px rgba(57,255,20,0.5)' }}>
+        <div className="rad-badge" style={{ marginBottom: '1rem' }}>◈ Command Center</div>
+        <h1 className="gradient-text" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', fontWeight: 900, letterSpacing: '0.05em', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>
           Dashboard
         </h1>
       </div>
@@ -136,22 +136,22 @@ export default function DashboardPage() {
 
         {/* Left column: Profile */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div className="panel" style={{ padding: '1.5rem' }}>
+          <div className="panel" style={{ padding: '1.5rem', borderRadius: '12px' }}>
             {/* Avatar */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
               <div style={{
                 width: '72px', height: '72px', borderRadius: '50%',
-                background: 'rgba(57,255,20,0.1)', border: '2px solid #39ff14',
+                background: 'rgba(191,64,255,0.1)', border: '2px solid #bf40ff',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '1.5rem', fontWeight: 700, color: '#39ff14',
-                boxShadow: '0 0 20px rgba(57,255,20,0.3)',
+                fontSize: '1.5rem', fontWeight: 700, color: '#bf40ff',
+                boxShadow: '0 0 20px rgba(191,64,255,0.3)',
               }}>
                 {initials}
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1rem' }}>{displayName}</div>
-                {profile?.username && <div style={{ color: '#39ff14', fontSize: '0.8rem' }}>@{profile.username}</div>}
-                <div style={{ color: '#4a6b4a', fontSize: '0.75rem', marginTop: '0.25rem', wordBreak: 'break-all' }}>{user.email}</div>
+                <div style={{ color: '#e8e6e3', fontWeight: 700, fontSize: '1rem', fontFamily: "'Orbitron', sans-serif" }}>{displayName}</div>
+                {profile?.username && <div style={{ color: '#bf40ff', fontSize: '0.8rem' }}>@{profile.username}</div>}
+                <div style={{ color: '#5a5a6a', fontSize: '0.75rem', marginTop: '0.25rem', wordBreak: 'break-all' }}>{user.email}</div>
               </div>
             </div>
 
@@ -161,9 +161,9 @@ export default function DashboardPage() {
                 { label: 'Bookings', value: upcomingBookings.length },
                 { label: 'Events', value: upcomingSignups.length },
               ].map(s => (
-                <div key={s.label} style={{ background: 'rgba(57,255,20,0.05)', border: '1px solid rgba(57,255,20,0.15)', padding: '0.75rem', textAlign: 'center' }}>
-                  <div style={{ color: '#39ff14', fontSize: '1.4rem', fontWeight: 900 }}>{s.value}</div>
-                  <div style={{ color: '#7ab87a', fontSize: '0.7rem', letterSpacing: '0.1em' }}>{s.label}</div>
+                <div key={s.label} style={{ background: 'rgba(191,64,255,0.05)', border: '1px solid rgba(191,64,255,0.15)', padding: '0.75rem', textAlign: 'center', borderRadius: '12px' }}>
+                  <div style={{ color: '#bf40ff', fontSize: '1.4rem', fontWeight: 900, fontFamily: "'Orbitron', sans-serif" }}>{s.value}</div>
+                  <div style={{ color: '#8a8a9a', fontSize: '0.7rem', letterSpacing: '0.1em', fontFamily: "'Orbitron', sans-serif" }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -179,10 +179,10 @@ export default function DashboardPage() {
 
           {/* Profile edit panel */}
           {editingProfile && (
-            <div className="panel" style={{ padding: '1.5rem' }}>
+            <div className="panel" style={{ padding: '1.5rem', borderRadius: '12px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <div style={{ color: '#39ff14', fontSize: '0.8rem', letterSpacing: '0.1em', fontWeight: 700 }}>EDIT PROFILE</div>
-                <button onClick={() => setEditingProfile(false)} style={{ background: 'none', border: 'none', color: '#7ab87a', cursor: 'pointer' }}><X size={14} /></button>
+                <div style={{ color: '#bf40ff', fontSize: '0.8rem', letterSpacing: '0.1em', fontWeight: 700, fontFamily: "'Orbitron', sans-serif" }}>EDIT PROFILE</div>
+                <button onClick={() => setEditingProfile(false)} style={{ background: 'none', border: 'none', color: '#8a8a9a', cursor: 'pointer' }}><X size={14} /></button>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                 {[
@@ -190,7 +190,7 @@ export default function DashboardPage() {
                   { key: 'username', label: 'Username', placeholder: 'goblin_lord' },
                 ].map(field => (
                   <div key={field.key}>
-                    <label style={{ display: 'block', fontSize: '0.7rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.3rem', textTransform: 'uppercase' }}>{field.label}</label>
+                    <label style={{ display: 'block', fontSize: '0.7rem', color: '#8a8a9a', letterSpacing: '0.1em', marginBottom: '0.3rem', textTransform: 'uppercase' }}>{field.label}</label>
                     <input
                       value={profileForm[field.key as keyof typeof profileForm]}
                       onChange={e => setProfileForm(p => ({ ...p, [field.key]: e.target.value }))}
@@ -200,7 +200,7 @@ export default function DashboardPage() {
                   </div>
                 ))}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.7rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.3rem', textTransform: 'uppercase' }}>Bio</label>
+                  <label style={{ display: 'block', fontSize: '0.7rem', color: '#8a8a9a', letterSpacing: '0.1em', marginBottom: '0.3rem', textTransform: 'uppercase' }}>Bio</label>
                   <textarea
                     value={profileForm.bio}
                     onChange={e => setProfileForm(p => ({ ...p, bio: e.target.value }))}
@@ -230,39 +230,39 @@ export default function DashboardPage() {
           {/* Upcoming Bookings */}
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Calendar size={16} style={{ color: '#39ff14' }} /> Upcoming Bookings
+              <h2 style={{ color: '#e8e6e3', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Orbitron', sans-serif" }}>
+                <Calendar size={16} style={{ color: '#bf40ff' }} /> Upcoming Bookings
               </h2>
               <Link href="/book" className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.3rem 0.7rem' }}>+ New</Link>
             </div>
 
             {upcomingBookings.length === 0 ? (
-              <div className="panel" style={{ padding: '1.5rem', textAlign: 'center', color: '#4a6b4a', fontSize: '0.9rem' }}>
+              <div className="panel" style={{ padding: '1.5rem', textAlign: 'center', color: '#5a5a6a', fontSize: '0.9rem', borderRadius: '12px' }}>
                 No upcoming bookings.{' '}
-                <Link href="/book" style={{ color: '#39ff14', textDecoration: 'none' }}>Reserve a table →</Link>
+                <Link href="/book" style={{ color: '#bf40ff', textDecoration: 'none' }}>Reserve a table →</Link>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {upcomingBookings.map(b => (
-                  <div key={b.id} className="panel" style={{ padding: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', borderLeft: '3px solid #39ff14' }}>
+                  <div key={b.id} className="panel" style={{ padding: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', borderLeft: '3px solid #bf40ff', borderRadius: '12px' }}>
                     <div style={{ flexGrow: 1 }}>
                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
-                        <span style={{ color: '#39ff14', fontWeight: 700, fontSize: '0.9rem' }}>{b.table_name}</span>
-                        <span style={{ color: '#4a6b4a', fontSize: '0.75rem', border: '1px solid rgba(57,255,20,0.2)', padding: '0.1rem 0.4rem', letterSpacing: '0.08em' }}>{b.status.toUpperCase()}</span>
+                        <span style={{ color: '#bf40ff', fontWeight: 700, fontSize: '0.9rem' }}>{b.table_name}</span>
+                        <span style={{ color: '#5a5a6a', fontSize: '0.75rem', border: '1px solid rgba(191,64,255,0.2)', padding: '0.1rem 0.4rem', letterSpacing: '0.08em' }}>{b.status.toUpperCase()}</span>
                       </div>
                       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                        <span style={{ color: '#7ab87a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Calendar size={11} style={{ color: '#39ff14' }} />{b.date}</span>
-                        <span style={{ color: '#7ab87a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Clock size={11} style={{ color: '#39ff14' }} />{b.time_slot} · {b.duration}</span>
-                        <span style={{ color: '#7ab87a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Users size={11} style={{ color: '#39ff14' }} />{b.players} players</span>
+                        <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Calendar size={11} style={{ color: '#bf40ff' }} />{b.date}</span>
+                        <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Clock size={11} style={{ color: '#bf40ff' }} />{b.time_slot} · {b.duration}</span>
+                        <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Users size={11} style={{ color: '#bf40ff' }} />{b.players} players</span>
                       </div>
-                      <div style={{ color: '#4a6b4a', fontSize: '0.78rem', marginTop: '0.3rem' }}>{b.game_type}</div>
+                      <div style={{ color: '#5a5a6a', fontSize: '0.78rem', marginTop: '0.3rem' }}>{b.game_type}</div>
                     </div>
                     <button
                       onClick={() => cancelBooking(b.id)}
                       title="Cancel booking"
-                      style={{ background: 'none', border: 'none', color: '#4a6b4a', cursor: 'pointer', padding: '0.3rem', flexShrink: 0, transition: 'color 0.2s' }}
+                      style={{ background: 'none', border: 'none', color: '#5a5a6a', cursor: 'pointer', padding: '0.3rem', flexShrink: 0, transition: 'color 0.2s' }}
                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#ff4444'}
-                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#4a6b4a'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#5a5a6a'}
                     >
                       <Trash2 size={15} />
                     </button>
@@ -274,12 +274,12 @@ export default function DashboardPage() {
             {/* Past bookings */}
             {pastBookings.length > 0 && (
               <div style={{ marginTop: '1.25rem' }}>
-                <div style={{ fontSize: '0.75rem', color: '#4a6b4a', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Past / Cancelled</div>
+                <div style={{ fontSize: '0.75rem', color: '#5a5a6a', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Past / Cancelled</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {pastBookings.slice(0, 5).map(b => (
-                    <div key={b.id} style={{ padding: '0.75rem 1rem', background: 'rgba(57,255,20,0.02)', border: '1px solid rgba(57,255,20,0.08)', display: 'flex', justifyContent: 'space-between', gap: '1rem', opacity: 0.6 }}>
-                      <span style={{ color: '#7ab87a', fontSize: '0.82rem' }}>{b.table_name} · {b.date}</span>
-                      <span style={{ fontSize: '0.72rem', color: b.status === 'cancelled' ? '#ff8888' : '#4a6b4a', letterSpacing: '0.08em' }}>{b.status.toUpperCase()}</span>
+                    <div key={b.id} style={{ padding: '0.75rem 1rem', background: 'rgba(191,64,255,0.02)', border: '1px solid rgba(191,64,255,0.08)', display: 'flex', justifyContent: 'space-between', gap: '1rem', opacity: 0.6, borderRadius: '12px' }}>
+                      <span style={{ color: '#8a8a9a', fontSize: '0.82rem' }}>{b.table_name} · {b.date}</span>
+                      <span style={{ fontSize: '0.72rem', color: b.status === 'cancelled' ? '#ff8888' : '#5a5a6a', letterSpacing: '0.08em' }}>{b.status.toUpperCase()}</span>
                     </div>
                   ))}
                 </div>
@@ -290,34 +290,34 @@ export default function DashboardPage() {
           {/* Event signups */}
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <User size={16} style={{ color: '#39ff14' }} /> Event Sign-ups
+              <h2 style={{ color: '#e8e6e3', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Orbitron', sans-serif" }}>
+                <User size={16} style={{ color: '#bf40ff' }} /> Event Sign-ups
               </h2>
               <Link href="/events" className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.3rem 0.7rem' }}>Browse Events</Link>
             </div>
 
             {upcomingSignups.length === 0 ? (
-              <div className="panel" style={{ padding: '1.5rem', textAlign: 'center', color: '#4a6b4a', fontSize: '0.9rem' }}>
+              <div className="panel" style={{ padding: '1.5rem', textAlign: 'center', color: '#5a5a6a', fontSize: '0.9rem', borderRadius: '12px' }}>
                 No upcoming event registrations.{' '}
-                <Link href="/events" style={{ color: '#39ff14', textDecoration: 'none' }}>Browse this week →</Link>
+                <Link href="/events" style={{ color: '#bf40ff', textDecoration: 'none' }}>Browse this week →</Link>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {upcomingSignups.map(s => (
-                  <div key={s.id} className="panel" style={{ padding: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', borderLeft: '3px solid #60a5fa' }}>
+                  <div key={s.id} className="panel" style={{ padding: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', borderLeft: '3px solid #60a5fa', borderRadius: '12px' }}>
                     <div>
-                      <div style={{ color: '#c8f5c2', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.3rem' }}>{s.event_title}</div>
+                      <div style={{ color: '#e8e6e3', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.3rem' }}>{s.event_title}</div>
                       <div style={{ display: 'flex', gap: '1rem' }}>
-                        <span style={{ color: '#7ab87a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Calendar size={11} style={{ color: '#60a5fa' }} />{s.event_date}</span>
-                        <span style={{ color: '#7ab87a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Clock size={11} style={{ color: '#60a5fa' }} />{s.event_time}</span>
+                        <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Calendar size={11} style={{ color: '#60a5fa' }} />{s.event_date}</span>
+                        <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Clock size={11} style={{ color: '#60a5fa' }} />{s.event_time}</span>
                       </div>
                     </div>
                     <button
                       onClick={() => removeSignup(s.id)}
                       title="Remove signup"
-                      style={{ background: 'none', border: 'none', color: '#4a6b4a', cursor: 'pointer', padding: '0.3rem', flexShrink: 0, transition: 'color 0.2s' }}
+                      style={{ background: 'none', border: 'none', color: '#5a5a6a', cursor: 'pointer', padding: '0.3rem', flexShrink: 0, transition: 'color 0.2s' }}
                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#ff4444'}
-                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#4a6b4a'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#5a5a6a'}
                     >
                       <Trash2 size={15} />
                     </button>

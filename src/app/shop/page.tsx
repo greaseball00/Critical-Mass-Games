@@ -275,11 +275,11 @@ export default function ShopPage() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div className="rad-badge" style={{ marginBottom: '1rem' }}>☢ The Armory</div>
-          <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', fontWeight: 900, color: '#39ff14', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 20px rgba(57,255,20,0.5)', marginBottom: '0.5rem' }}>
+          <div className="rad-badge" style={{ marginBottom: '1rem', fontFamily: "'Orbitron', sans-serif" }}>✦ The Armory</div>
+          <h1 className="gradient-text" style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', fontWeight: 900, fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
             Shop
           </h1>
-          <p style={{ color: '#7ab87a', lineHeight: 1.6 }}>
+          <p style={{ color: '#8a8a9a', lineHeight: 1.6 }}>
             Dice, terrain, cosplay props, and accessories. Locally curated, Tri-Cities powered.
           </p>
         </div>
@@ -288,12 +288,12 @@ export default function ShopPage() {
         <button
           onClick={() => setCartOpen(true)}
           className="panel"
-          style={{ padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', background: 'transparent', border: '1px solid rgba(57,255,20,0.2)', fontFamily: 'Courier New, monospace', color: '#c8f5c2', fontSize: '0.9rem', position: 'relative' }}
+          style={{ padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', background: 'transparent', border: '1px solid rgba(191,64,255,0.2)', fontFamily: "'Orbitron', sans-serif", color: '#e8e6e3', fontSize: '0.9rem', position: 'relative', borderRadius: '12px' }}
         >
           <ShoppingCart size={18} style={{ color: '#39ff14' }} />
           Cart
           {cart.length > 0 && (
-            <span style={{ background: '#39ff14', color: '#050a05', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 900 }}>
+            <span style={{ background: '#39ff14', color: '#0a0a0f', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 900 }}>
               {cart.length}
             </span>
           )}
@@ -302,7 +302,7 @@ export default function ShopPage() {
 
       {/* Category filter */}
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2.5rem', alignItems: 'center' }}>
-        <Filter size={14} style={{ color: '#7ab87a' }} />
+        <Filter size={14} style={{ color: '#8a8a9a' }} />
         {categories.map(({ key, label }) => (
           <button
             key={key}
@@ -312,18 +312,19 @@ export default function ShopPage() {
               fontSize: '0.8rem',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              border: activeCategory === key ? '1px solid #39ff14' : '1px solid rgba(57,255,20,0.25)',
-              background: activeCategory === key ? 'rgba(57,255,20,0.12)' : 'transparent',
-              color: activeCategory === key ? '#39ff14' : '#7ab87a',
+              border: activeCategory === key ? '1px solid #bf40ff' : '1px solid rgba(191,64,255,0.25)',
+              background: activeCategory === key ? 'rgba(191,64,255,0.12)' : 'transparent',
+              color: activeCategory === key ? '#bf40ff' : '#8a8a9a',
               cursor: 'pointer',
               transition: 'all 0.2s',
-              fontFamily: 'Courier New, monospace',
+              fontFamily: "'Orbitron', sans-serif",
+              borderRadius: '12px',
             }}
           >
             {label}
           </button>
         ))}
-        <span style={{ color: '#4a6b4a', fontSize: '0.8rem', marginLeft: 'auto' }}>
+        <span style={{ color: '#5a5a6a', fontSize: '0.8rem', marginLeft: 'auto' }}>
           {filtered.length} products
         </span>
       </div>
@@ -334,7 +335,7 @@ export default function ShopPage() {
           <div
             key={product.id}
             className="panel panel-hover"
-            style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}
+            style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative', borderRadius: '12px' }}
           >
             {/* Badge */}
             {product.badge && (
@@ -344,12 +345,14 @@ export default function ShopPage() {
                 left: '0.75rem',
                 zIndex: 2,
                 background: product.badgeColor === '#39ff14' ? '#39ff14' : product.badgeColor,
-                color: '#050a05',
+                color: '#0a0a0f',
                 padding: '0.2rem 0.6rem',
                 fontSize: '0.65rem',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
+                fontFamily: "'Orbitron', sans-serif",
+                borderRadius: '12px',
               }}>
                 {product.badge}
               </div>
@@ -370,45 +373,45 @@ export default function ShopPage() {
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1)'}
               />
               {/* Overlay tint */}
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(5,10,5,0.7) 0%, transparent 60%)', pointerEvents: 'none' }} />
-              <div style={{ position: 'absolute', bottom: '0.5rem', right: '0.75rem', fontSize: '0.65rem', color: 'rgba(57,255,20,0.7)', letterSpacing: '0.1em' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.7) 0%, transparent 60%)', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', bottom: '0.5rem', right: '0.75rem', fontSize: '0.65rem', color: 'rgba(191,64,255,0.7)', letterSpacing: '0.1em' }}>
                 QUICK VIEW
               </div>
             </div>
 
             {/* Content */}
             <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem', flexGrow: 1 }}>
-              <h3 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.3, margin: 0 }}>
+              <h3 style={{ color: '#e8e6e3', fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.3, margin: 0, fontFamily: "'Orbitron', sans-serif" }}>
                 {product.name}
               </h3>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <StarRating rating={product.rating} />
-                <span style={{ color: '#4a6b4a', fontSize: '0.7rem' }}>({product.reviews})</span>
+                <span style={{ color: '#5a5a6a', fontSize: '0.7rem' }}>({product.reviews})</span>
               </div>
 
-              <p style={{ color: '#7ab87a', fontSize: '0.82rem', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
+              <p style={{ color: '#8a8a9a', fontSize: '0.82rem', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
                 {product.description}
               </p>
 
               {/* Tags */}
               <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
                 {product.tags.map(tag => (
-                  <span key={tag} style={{ fontSize: '0.65rem', color: '#4a6b4a', border: '1px solid rgba(57,255,20,0.15)', padding: '0.1rem 0.4rem' }}>
+                  <span key={tag} style={{ fontSize: '0.65rem', color: '#5a5a6a', border: '1px solid rgba(191,64,255,0.15)', padding: '0.1rem 0.4rem', borderRadius: '12px' }}>
                     {tag}
                   </span>
                 ))}
               </div>
 
               {/* Price + CTA */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: '1px solid rgba(57,255,20,0.1)', marginTop: 'auto' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: '1px solid rgba(191,64,255,0.1)', marginTop: 'auto' }}>
                 <span style={{ color: '#39ff14', fontWeight: 900, fontSize: '1.2rem' }}>
                   ${product.price.toFixed(2)}
                 </span>
                 <button
                   className="btn-secondary"
                   onClick={() => addToCart(product.id)}
-                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.75rem' }}
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.75rem', fontFamily: "'Orbitron', sans-serif", borderRadius: '12px' }}
                 >
                   Add to Cart
                 </button>
@@ -419,15 +422,15 @@ export default function ShopPage() {
       </div>
 
       {/* Custom order CTA */}
-      <div className="warning-stripe panel" style={{ marginTop: '3rem', padding: '2.5rem', textAlign: 'center', borderColor: 'rgba(57,255,20,0.3)' }}>
-        <h3 style={{ color: '#39ff14', fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+      <div className="warning-stripe panel" style={{ marginTop: '3rem', padding: '2.5rem', textAlign: 'center', borderColor: 'rgba(191,64,255,0.3)', borderRadius: '12px' }}>
+        <h3 className="gradient-text" style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.75rem', fontFamily: "'Orbitron', sans-serif" }}>
           Need something custom?
         </h3>
-        <p style={{ color: '#7ab87a', maxWidth: '500px', margin: '0 auto 1.5rem', fontSize: '0.9rem', lineHeight: 1.6 }}>
+        <p style={{ color: '#8a8a9a', maxWidth: '500px', margin: '0 auto 1.5rem', fontSize: '0.9rem', lineHeight: 1.6 }}>
           We build custom terrain, commission cosplay props, and source specialty dice sets.
           Talk to us about your project.
         </p>
-        <a href="mailto:play@criticalmass.games" className="btn-primary">
+        <a href="mailto:play@criticalmass.games" className="btn-primary" style={{ fontFamily: "'Orbitron', sans-serif" }}>
           <span>Request a Custom Order</span>
         </a>
       </div>
@@ -444,21 +447,21 @@ export default function ShopPage() {
           {/* Drawer */}
           <div style={{
             position: 'absolute', top: 0, right: 0, bottom: 0, width: '360px', maxWidth: '100vw',
-            background: '#0a1a0a', borderLeft: '1px solid rgba(57,255,20,0.3)',
+            background: '#12121a', borderLeft: '1px solid rgba(191,64,255,0.3)',
             display: 'flex', flexDirection: 'column', padding: '1.5rem', overflowY: 'auto',
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <div>
-                <div className="rad-badge" style={{ marginBottom: '0.4rem' }}>Your Cart</div>
-                <span style={{ color: '#7ab87a', fontSize: '0.85rem' }}>{cart.length} item{cart.length !== 1 ? 's' : ''}</span>
+                <div className="rad-badge" style={{ marginBottom: '0.4rem', fontFamily: "'Orbitron', sans-serif" }}>Your Cart</div>
+                <span style={{ color: '#8a8a9a', fontSize: '0.85rem' }}>{cart.length} item{cart.length !== 1 ? 's' : ''}</span>
               </div>
-              <button onClick={() => setCartOpen(false)} style={{ background: 'none', border: 'none', color: '#7ab87a', cursor: 'pointer' }}>
+              <button onClick={() => setCartOpen(false)} style={{ background: 'none', border: 'none', color: '#8a8a9a', cursor: 'pointer' }}>
                 <X size={20} />
               </button>
             </div>
 
             {cart.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '3rem 0', color: '#4a6b4a' }}>
+              <div style={{ textAlign: 'center', padding: '3rem 0', color: '#5a5a6a' }}>
                 <ShoppingCart size={40} style={{ margin: '0 auto 1rem', opacity: 0.4 }} />
                 <p>Your cart is empty</p>
               </div>
@@ -466,33 +469,33 @@ export default function ShopPage() {
               <>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
                   {cartItems.map((item, idx) => (
-                    <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', borderBottom: '1px solid rgba(57,255,20,0.1)', paddingBottom: '1rem' }}>
+                    <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', borderBottom: '1px solid rgba(191,64,255,0.1)', paddingBottom: '1rem' }}>
                       <div style={{ position: 'relative', width: '60px', height: '60px', flexShrink: 0 }}>
                         <Image src={item.image} alt={item.imageAlt} fill style={{ objectFit: 'cover' }} sizes="60px" />
                       </div>
                       <div style={{ flexGrow: 1 }}>
-                        <div style={{ color: '#c8f5c2', fontSize: '0.85rem', fontWeight: 600 }}>{item.name}</div>
+                        <div style={{ color: '#e8e6e3', fontSize: '0.85rem', fontWeight: 600 }}>{item.name}</div>
                         <div style={{ color: '#39ff14', fontSize: '0.9rem', fontWeight: 700 }}>${item.price.toFixed(2)}</div>
                       </div>
-                      <button onClick={() => removeFromCart(idx)} style={{ background: 'none', border: 'none', color: '#4a6b4a', cursor: 'pointer' }}>
+                      <button onClick={() => removeFromCart(idx)} style={{ background: 'none', border: 'none', color: '#5a5a6a', cursor: 'pointer' }}>
                         <X size={14} />
                       </button>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ borderTop: '1px solid rgba(57,255,20,0.2)', paddingTop: '1rem', marginTop: '1rem' }}>
+                <div style={{ borderTop: '1px solid rgba(191,64,255,0.2)', paddingTop: '1rem', marginTop: '1rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                    <span style={{ color: '#7ab87a' }}>Subtotal</span>
+                    <span style={{ color: '#8a8a9a' }}>Subtotal</span>
                     <span style={{ color: '#39ff14', fontWeight: 700, fontSize: '1.1rem' }}>${cartTotal.toFixed(2)}</span>
                   </div>
-                  <div style={{ background: 'rgba(57,255,20,0.05)', border: '1px solid rgba(57,255,20,0.2)', padding: '0.75rem', marginBottom: '1rem', fontSize: '0.8rem', color: '#7ab87a', lineHeight: 1.5 }}>
+                  <div style={{ background: 'rgba(191,64,255,0.05)', border: '1px solid rgba(191,64,255,0.2)', padding: '0.75rem', marginBottom: '1rem', fontSize: '0.8rem', color: '#8a8a9a', lineHeight: 1.5, borderRadius: '12px' }}>
                     ⚠ Online checkout coming soon. To purchase, visit us in-store or email us your order at <strong style={{ color: '#39ff14' }}>play@criticalmass.games</strong>
                   </div>
                   <a
                     href={`mailto:play@criticalmass.games?subject=Order Request&body=Hi! I'd like to order the following items:%0A%0A${cartItems.map(i => `- ${i.name} ($${i.price.toFixed(2)})`).join('%0A')}%0A%0ASubtotal: $${cartTotal.toFixed(2)}`}
                     className="btn-primary"
-                    style={{ display: 'block', textAlign: 'center', width: '100%' }}
+                    style={{ display: 'block', textAlign: 'center', width: '100%', fontFamily: "'Orbitron', sans-serif" }}
                   >
                     <span>Email This Order</span>
                   </a>
@@ -508,37 +511,37 @@ export default function ShopPage() {
         <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
           <div onClick={() => setQuickView(null)} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)' }} />
           <div style={{
-            position: 'relative', background: '#0a1a0a', border: '1px solid rgba(57,255,20,0.4)',
+            position: 'relative', background: '#12121a', border: '1px solid rgba(191,64,255,0.4)',
             maxWidth: '600px', width: '100%', zIndex: 1, overflow: 'hidden',
-            boxShadow: '0 0 60px rgba(57,255,20,0.15)',
+            boxShadow: '0 0 60px rgba(191,64,255,0.15)', borderRadius: '12px',
           }}>
             {/* Image */}
             <div style={{ position: 'relative', height: '260px' }}>
               <Image src={quickView.image} alt={quickView.imageAlt} fill style={{ objectFit: 'cover', filter: 'brightness(0.8) saturate(0.85)' }} sizes="600px" />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,26,10,0.95) 0%, transparent 60%)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(18,18,26,0.95) 0%, transparent 60%)' }} />
               <button
                 onClick={() => setQuickView(null)}
-                style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(57,255,20,0.3)', color: '#c8f5c2', cursor: 'pointer', padding: '0.3rem', display: 'flex', borderRadius: '2px' }}
+                style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(191,64,255,0.3)', color: '#e8e6e3', cursor: 'pointer', padding: '0.3rem', display: 'flex', borderRadius: '2px' }}
               >
                 <X size={16} />
               </button>
               {quickView.badge && (
-                <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem', background: quickView.badgeColor, color: '#050a05', padding: '0.2rem 0.6rem', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.1em' }}>
+                <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem', background: quickView.badgeColor, color: '#0a0a0f', padding: '0.2rem 0.6rem', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.1em', fontFamily: "'Orbitron', sans-serif", borderRadius: '12px' }}>
                   {quickView.badge}
                 </div>
               )}
             </div>
 
             <div style={{ padding: '1.5rem' }}>
-              <h2 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1.2rem', marginBottom: '0.5rem' }}>{quickView.name}</h2>
+              <h2 style={{ color: '#e8e6e3', fontWeight: 700, fontSize: '1.2rem', marginBottom: '0.5rem', fontFamily: "'Orbitron', sans-serif" }}>{quickView.name}</h2>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
                 <StarRating rating={quickView.rating} />
-                <span style={{ color: '#4a6b4a', fontSize: '0.75rem' }}>({quickView.reviews} reviews)</span>
+                <span style={{ color: '#5a5a6a', fontSize: '0.75rem' }}>({quickView.reviews} reviews)</span>
               </div>
-              <p style={{ color: '#7ab87a', lineHeight: 1.7, marginBottom: '1rem', fontSize: '0.9rem' }}>{quickView.description}</p>
+              <p style={{ color: '#8a8a9a', lineHeight: 1.7, marginBottom: '1rem', fontSize: '0.9rem' }}>{quickView.description}</p>
               <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
                 {quickView.tags.map(t => (
-                  <span key={t} style={{ fontSize: '0.7rem', color: '#4a6b4a', border: '1px solid rgba(57,255,20,0.2)', padding: '0.15rem 0.5rem' }}>{t}</span>
+                  <span key={t} style={{ fontSize: '0.7rem', color: '#5a5a6a', border: '1px solid rgba(191,64,255,0.2)', padding: '0.15rem 0.5rem', borderRadius: '12px' }}>{t}</span>
                 ))}
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -546,6 +549,7 @@ export default function ShopPage() {
                 <button
                   className="btn-primary"
                   onClick={() => { addToCart(quickView.id); setQuickView(null); setCartOpen(true); }}
+                  style={{ fontFamily: "'Orbitron', sans-serif" }}
                 >
                   <span>Add to Cart</span>
                 </button>

@@ -73,11 +73,11 @@ export default function SocialAuthButtons() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
       {/* Divider */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', margin: '0.25rem 0' }}>
-        <div style={{ flex: 1, height: '1px', background: 'rgba(57,255,20,0.15)' }} />
-        <span style={{ fontSize: '0.7rem', color: '#4a6b4a', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+        <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(191,64,255,0.3), transparent)' }} />
+        <span style={{ fontSize: '0.6rem', color: '#5a5a6a', letterSpacing: '1px', textTransform: 'uppercase', whiteSpace: 'nowrap', fontFamily: "'Orbitron', sans-serif" }}>
           or continue with
         </span>
-        <div style={{ flex: 1, height: '1px', background: 'rgba(57,255,20,0.15)' }} />
+        <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(191,64,255,0.3), transparent)' }} />
       </div>
 
       {/* Buttons */}
@@ -96,11 +96,13 @@ export default function SocialAuthButtons() {
               gap: '0.4rem',
               padding: '0.6rem 0.5rem',
               background: loadingProvider === p.id ? p.hoverColor : p.color,
-              border: '1px solid rgba(57,255,20,0.2)',
-              color: '#c8f5c2',
+              border: '1px solid rgba(191,64,255,0.2)',
+              borderRadius: '8px',
+              color: '#e8e6e3',
               fontSize: '0.8rem',
               fontWeight: 600,
-              letterSpacing: '0.03em',
+              fontFamily: "'Orbitron', sans-serif",
+              letterSpacing: '0.5px',
               cursor: loadingProvider !== null ? 'wait' : 'pointer',
               opacity: loadingProvider !== null && loadingProvider !== p.id ? 0.5 : 1,
               transition: 'background 0.2s, opacity 0.2s',
@@ -113,7 +115,7 @@ export default function SocialAuthButtons() {
             }}
           >
             {loadingProvider === p.id ? (
-              <span style={{ fontSize: '0.75rem', color: '#7ab87a' }}>...</span>
+              <span style={{ fontSize: '0.75rem', color: '#8a8a9a' }}>...</span>
             ) : (
               p.icon
             )}
@@ -123,8 +125,8 @@ export default function SocialAuthButtons() {
       </div>
 
       {error && (
-        <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', padding: '0.6rem', color: '#ff8888', fontSize: '0.8rem' }}>
-          ⚠ {error}
+        <div style={{ background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.4)', borderRadius: '8px', padding: '0.6rem', color: '#ff8888', fontSize: '0.8rem' }}>
+          &#9888; {error}
         </div>
       )}
     </div>

@@ -36,7 +36,6 @@ export default function Navbar() {
   const { user, loading, signOut } = useAuth();
   const userMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close user menu when clicking outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
@@ -57,18 +56,18 @@ export default function Navbar() {
   const displayName = user?.user_metadata?.username
     || user?.user_metadata?.full_name?.split(' ')[0]
     || user?.email?.split('@')[0]
-    || 'Operative';
+    || 'Adventurer';
 
   return (
     <nav
       style={{
-        background: 'rgba(5, 10, 5, 0.95)',
-        borderBottom: '1px solid rgba(57, 255, 20, 0.3)',
+        background: 'rgba(10, 10, 15, 0.95)',
+        borderBottom: '1px solid rgba(191, 64, 255, 0.2)',
         backdropFilter: 'blur(10px)',
         position: 'sticky',
         top: 0,
         zIndex: 50,
-        boxShadow: '0 2px 20px rgba(57, 255, 20, 0.15)',
+        boxShadow: '0 2px 20px rgba(191, 64, 255, 0.1)',
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -78,11 +77,11 @@ export default function Navbar() {
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <Logo width={40} height={40} />
             <div>
-              <div className="flicker" style={{ color: '#39ff14', fontWeight: 'bold', fontSize: '1.1rem', letterSpacing: '0.05em', textShadow: '0 0 10px #39ff14' }}>
+              <div className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 700, fontSize: '1.1rem', letterSpacing: '0.05em' }}>
                 CRITICAL MASS
               </div>
-              <div style={{ color: '#7ab87a', fontSize: '0.65rem', letterSpacing: '0.25em', textTransform: 'uppercase' }}>
-                Games · Tri-Cities
+              <div style={{ color: '#8a8a9a', fontSize: '0.65rem', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: "'Cinzel', serif" }}>
+                Games &middot; Tri-Cities
               </div>
             </div>
           </Link>
@@ -97,13 +96,15 @@ export default function Navbar() {
                   href={href}
                   style={{
                     padding: '0.4rem 0.9rem',
-                    fontSize: '0.85rem',
-                    letterSpacing: '0.08em',
+                    fontSize: '0.8rem',
+                    fontFamily: "'Orbitron', sans-serif",
+                    letterSpacing: '1px',
                     textTransform: 'uppercase',
                     textDecoration: 'none',
-                    color: active ? '#39ff14' : '#c8f5c2',
-                    background: active ? 'rgba(57,255,20,0.1)' : 'transparent',
-                    border: active ? '1px solid rgba(57,255,20,0.5)' : '1px solid transparent',
+                    borderRadius: '6px',
+                    color: active ? '#bf40ff' : '#e8e6e3',
+                    background: active ? 'rgba(191,64,255,0.1)' : 'transparent',
+                    border: active ? '1px solid rgba(191,64,255,0.4)' : '1px solid transparent',
                     transition: 'all 0.2s ease',
                   }}
                   onMouseEnter={e => {
@@ -114,7 +115,7 @@ export default function Navbar() {
                   }}
                   onMouseLeave={e => {
                     if (!active) {
-                      (e.currentTarget as HTMLElement).style.color = '#c8f5c2';
+                      (e.currentTarget as HTMLElement).style.color = '#e8e6e3';
                       (e.currentTarget as HTMLElement).style.borderColor = 'transparent';
                     }
                   }}
@@ -125,9 +126,8 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop right: social icons + user menu or auth buttons */}
+          {/* Desktop right: social icons + user menu */}
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }} className="hidden-mobile">
-            {/* Social links */}
             <a href="https://twitch.tv/PLACEHOLDER" target="_blank" rel="noopener noreferrer"
               title="Twitch" style={{ color: '#9147FF', opacity: 0.8, display: 'flex', alignItems: 'center', transition: 'opacity 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
@@ -138,11 +138,10 @@ export default function Navbar() {
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '0.8'}
             ><DiscordIcon /></a>
-            <div style={{ width: '1px', height: '20px', background: 'rgba(57,255,20,0.2)' }} />
+            <div style={{ width: '1px', height: '20px', background: 'rgba(191,64,255,0.2)' }} />
             {loading ? (
               <div className="pulse rad-badge">Loading...</div>
             ) : user ? (
-              /* Logged-in user menu */
               <div ref={userMenuRef} style={{ position: 'relative' }}>
                 <button
                   onClick={() => setUserMenuOpen(v => !v)}
@@ -150,19 +149,21 @@ export default function Navbar() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem',
-                    background: 'rgba(57,255,20,0.08)',
-                    border: '1px solid rgba(57,255,20,0.4)',
-                    color: '#c8f5c2',
+                    background: 'rgba(191,64,255,0.08)',
+                    border: '1px solid rgba(191,64,255,0.3)',
+                    borderRadius: '8px',
+                    color: '#e8e6e3',
                     padding: '0.4rem 0.9rem',
                     cursor: 'pointer',
-                    fontFamily: 'Courier New, monospace',
-                    fontSize: '0.85rem',
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontSize: '0.75rem',
+                    letterSpacing: '1px',
                     transition: 'all 0.2s',
                   }}
                 >
-                  <User size={14} style={{ color: '#39ff14' }} />
+                  <User size={14} style={{ color: '#bf40ff' }} />
                   {displayName}
-                  <ChevronDown size={12} style={{ color: '#7ab87a', transform: userMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
+                  <ChevronDown size={12} style={{ color: '#8a8a9a', transform: userMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
                 </button>
 
                 {userMenuOpen && (
@@ -171,31 +172,33 @@ export default function Navbar() {
                       position: 'absolute',
                       top: 'calc(100% + 0.5rem)',
                       right: 0,
-                      background: '#0a1a0a',
-                      border: '1px solid rgba(57,255,20,0.3)',
+                      background: '#12121a',
+                      border: '1px solid rgba(191,64,255,0.3)',
+                      borderRadius: '10px',
                       boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
                       minWidth: '180px',
                       zIndex: 100,
+                      overflow: 'hidden',
                     }}
                   >
-                    <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#4a6b4a', letterSpacing: '0.1em' }}>LOGGED IN AS</div>
-                      <div style={{ color: '#39ff14', fontSize: '0.85rem', fontWeight: 600, marginTop: '0.15rem', wordBreak: 'break-all' }}>
+                    <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid rgba(191,64,255,0.1)' }}>
+                      <div style={{ fontSize: '0.6rem', color: '#5a5a6a', letterSpacing: '1px', fontFamily: "'Orbitron', sans-serif" }}>LOGGED IN AS</div>
+                      <div style={{ color: '#bf40ff', fontSize: '0.85rem', fontWeight: 600, marginTop: '0.15rem', wordBreak: 'break-all' }}>
                         {user.email}
                       </div>
                     </div>
                     <Link
                       href="/dashboard"
                       onClick={() => setUserMenuOpen(false)}
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.7rem 1rem', color: '#c8f5c2', textDecoration: 'none', fontSize: '0.85rem', transition: 'background 0.2s' }}
-                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(57,255,20,0.07)'}
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.7rem 1rem', color: '#e8e6e3', textDecoration: 'none', fontSize: '0.85rem', transition: 'background 0.2s' }}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(191,64,255,0.07)'}
                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
                     >
-                      <LayoutDashboard size={14} style={{ color: '#39ff14' }} /> Dashboard
+                      <LayoutDashboard size={14} style={{ color: '#bf40ff' }} /> Dashboard
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.7rem 1rem', color: '#ff8888', background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: 'Courier New, monospace', fontSize: '0.85rem', borderTop: '1px solid rgba(57,255,20,0.1)', transition: 'background 0.2s' }}
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.7rem 1rem', color: '#ff8888', background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: "'Cinzel', serif", fontSize: '0.85rem', borderTop: '1px solid rgba(191,64,255,0.1)', transition: 'background 0.2s' }}
                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255,68,68,0.07)'}
                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
                     >
@@ -205,13 +208,12 @@ export default function Navbar() {
                 )}
               </div>
             ) : (
-              /* Guest buttons */
               <>
-                <Link href="/auth/login" className="btn-secondary" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}>
+                <Link href="/auth/login" className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.4rem 0.8rem' }}>
                   Log In
                 </Link>
-                <Link href="/book" className="btn-primary">
-                  <span>Roll the Dice</span>
+                <Link href="/book" className="btn-primary" style={{ padding: '0.5rem 1.2rem', fontSize: '0.75rem' }}>
+                  <span>Enter the Realm</span>
                 </Link>
               </>
             )}
@@ -221,7 +223,7 @@ export default function Navbar() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="show-mobile"
-            style={{ background: 'none', border: 'none', color: '#39ff14', cursor: 'pointer', padding: '0.5rem' }}
+            style={{ background: 'none', border: 'none', color: '#bf40ff', cursor: 'pointer', padding: '0.5rem' }}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -229,7 +231,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div style={{ borderTop: '1px solid rgba(57,255,20,0.2)', padding: '1rem 0', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ borderTop: '1px solid rgba(191,64,255,0.2)', padding: '1rem 0', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
@@ -237,25 +239,26 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 style={{
                   padding: '0.6rem 1rem',
-                  color: pathname === href ? '#39ff14' : '#c8f5c2',
+                  color: pathname === href ? '#bf40ff' : '#e8e6e3',
                   textDecoration: 'none',
-                  letterSpacing: '0.1em',
+                  fontFamily: "'Orbitron', sans-serif",
+                  letterSpacing: '1px',
                   textTransform: 'uppercase',
-                  fontSize: '0.9rem',
-                  borderLeft: pathname === href ? '3px solid #39ff14' : '3px solid transparent',
+                  fontSize: '0.8rem',
+                  borderLeft: pathname === href ? '3px solid #bf40ff' : '3px solid transparent',
                 }}
               >
                 {label}
               </Link>
             ))}
 
-            <div style={{ borderTop: '1px solid rgba(57,255,20,0.15)', paddingTop: '0.75rem', marginTop: '0.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div style={{ borderTop: '1px solid rgba(191,64,255,0.15)', paddingTop: '0.75rem', marginTop: '0.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {user ? (
                 <>
-                  <Link href="/dashboard" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1rem', color: '#c8f5c2', textDecoration: 'none', fontSize: '0.9rem' }}>
-                    <LayoutDashboard size={14} style={{ color: '#39ff14' }} /> Dashboard
+                  <Link href="/dashboard" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1rem', color: '#e8e6e3', textDecoration: 'none', fontSize: '0.9rem' }}>
+                    <LayoutDashboard size={14} style={{ color: '#bf40ff' }} /> Dashboard
                   </Link>
-                  <button onClick={() => { setMobileOpen(false); handleSignOut(); }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1rem', color: '#ff8888', background: 'none', border: 'none', fontFamily: 'Courier New, monospace', fontSize: '0.9rem', cursor: 'pointer', textAlign: 'left' }}>
+                  <button onClick={() => { setMobileOpen(false); handleSignOut(); }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1rem', color: '#ff8888', background: 'none', border: 'none', fontFamily: "'Cinzel', serif", fontSize: '0.9rem', cursor: 'pointer', textAlign: 'left' }}>
                     <LogOut size={14} /> Log Out
                   </button>
                 </>

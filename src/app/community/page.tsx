@@ -122,11 +122,11 @@ export default function CommunityPage() {
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '3rem 1.5rem' }}>
       {/* Header */}
       <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
-        <div className="rad-badge" style={{ marginBottom: '1rem' }}>☢ Outreach Division</div>
-        <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', fontWeight: 900, color: '#39ff14', letterSpacing: '0.05em', textTransform: 'uppercase', textShadow: '0 0 20px rgba(57,255,20,0.5)', marginBottom: '1rem' }}>
+        <div className="rad-badge" style={{ marginBottom: '1rem' }}>✦ Outreach Division</div>
+        <h1 className="gradient-text" style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', fontWeight: 900, fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '1rem' }}>
           Community
         </h1>
-        <p style={{ color: '#7ab87a', maxWidth: '680px', margin: '0 auto', lineHeight: 1.8, fontSize: '1.05rem' }}>
+        <p style={{ color: '#8a8a9a', maxWidth: '680px', margin: '0 auto', lineHeight: 1.8, fontSize: '1.05rem' }}>
           Gaming is more than a hobby — it&apos;s a bridge. Critical Mass Games is committed to partnering with schools,
           churches, and youth groups across the Tri-Cities to use the power of play to connect, educate, and uplift our community.
         </p>
@@ -135,17 +135,17 @@ export default function CommunityPage() {
       {/* Impact stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '4rem' }}>
         {impactStats.map(stat => (
-          <div key={stat.label} className="panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
+          <div key={stat.label} className="panel" style={{ padding: '1.5rem', textAlign: 'center', borderRadius: '12px' }}>
             <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{stat.icon}</div>
-            <div style={{ color: '#39ff14', fontSize: '2rem', fontWeight: 900, lineHeight: 1 }}>{stat.value}</div>
-            <div style={{ color: '#7ab87a', fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '0.4rem' }}>{stat.label}</div>
+            <div style={{ color: '#bf40ff', fontSize: '2rem', fontWeight: 900, fontFamily: "'Orbitron', sans-serif", lineHeight: 1 }}>{stat.value}</div>
+            <div style={{ color: '#8a8a9a', fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '0.4rem' }}>{stat.label}</div>
           </div>
         ))}
       </div>
 
       {/* Programs */}
       <div style={{ marginBottom: '4rem' }}>
-        <h2 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1.4rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '2rem' }}>
+        <h2 style={{ color: '#e8e6e3', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", fontSize: '1.4rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '2rem' }}>
           Our Programs
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -153,7 +153,7 @@ export default function CommunityPage() {
             <div
               key={program.title}
               className="panel"
-              style={{ borderLeft: `3px solid ${program.color}`, overflow: 'hidden' }}
+              style={{ borderLeft: `3px solid ${program.color}`, overflow: 'hidden', borderRadius: '12px' }}
             >
               <div
                 onClick={() => setExpanded(expanded === i ? null : i)}
@@ -170,32 +170,32 @@ export default function CommunityPage() {
                   <div>{program.icon}</div>
                   <div>
                     <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0.25rem' }}>
-                      <h3 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1.05rem', margin: 0 }}>{program.title}</h3>
+                      <h3 style={{ color: '#e8e6e3', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", fontSize: '1.05rem', margin: 0 }}>{program.title}</h3>
                       {program.partner && (
                         <span style={{ fontSize: '0.65rem', color: program.color, border: `1px solid ${program.color}50`, padding: '0.1rem 0.4rem', letterSpacing: '0.1em' }}>
                           {program.partnerBadge}
                         </span>
                       )}
                     </div>
-                    <div style={{ color: '#7ab87a', fontSize: '0.8rem' }}>{program.subtitle}</div>
+                    <div style={{ color: '#8a8a9a', fontSize: '0.8rem' }}>{program.subtitle}</div>
                   </div>
                 </div>
-                <div style={{ color: '#39ff14', flexShrink: 0 }}>
+                <div style={{ color: '#bf40ff', flexShrink: 0 }}>
                   {expanded === i ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </div>
               </div>
 
               {expanded === i && (
                 <div style={{ padding: '0 1.5rem 1.5rem', borderTop: `1px solid ${program.color}20` }}>
-                  <p style={{ color: '#7ab87a', lineHeight: 1.7, marginBottom: '1.25rem', fontSize: '0.9rem' }}>
+                  <p style={{ color: '#8a8a9a', lineHeight: 1.7, marginBottom: '1.25rem', fontSize: '0.9rem' }}>
                     {program.description}
                   </p>
-                  <h4 style={{ color: '#c8f5c2', fontWeight: 600, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                  <h4 style={{ color: '#e8e6e3', fontWeight: 600, fontFamily: "'Orbitron', sans-serif", fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
                     What We Offer
                   </h4>
                   <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {program.offerings.map(o => (
-                      <li key={o} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#7ab87a', fontSize: '0.875rem' }}>
+                      <li key={o} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#8a8a9a', fontSize: '0.875rem' }}>
                         <Check size={13} style={{ color: program.color, flexShrink: 0, marginTop: '3px' }} /> {o}
                       </li>
                     ))}
@@ -216,38 +216,38 @@ export default function CommunityPage() {
 
       {/* Partners */}
       <div style={{ marginBottom: '4rem' }}>
-        <h2 style={{ color: '#c8f5c2', fontWeight: 700, fontSize: '1.4rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+        <h2 style={{ color: '#e8e6e3', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", fontSize: '1.4rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
           Current Partners
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
           {partners.map(p => (
-            <div key={p.name} className="panel" style={{ padding: '1rem' }}>
-              <div style={{ fontSize: '0.65rem', color: '#39ff14', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>{p.type}</div>
-              <div style={{ color: '#c8f5c2', fontWeight: 600, fontSize: '0.9rem', lineHeight: 1.3 }}>{p.name}</div>
-              <div style={{ color: '#4a6b4a', fontSize: '0.7rem', marginTop: '0.3rem' }}>Partner since {p.since}</div>
+            <div key={p.name} className="panel" style={{ padding: '1rem', borderRadius: '12px' }}>
+              <div style={{ fontSize: '0.65rem', color: '#ff6a00', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>{p.type}</div>
+              <div style={{ color: '#e8e6e3', fontWeight: 600, fontSize: '0.9rem', lineHeight: 1.3 }}>{p.name}</div>
+              <div style={{ color: '#5a5a6a', fontSize: '0.7rem', marginTop: '0.3rem' }}>Partner since {p.since}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Partner inquiry form */}
-      <div id="partner-form" className="warning-stripe panel" style={{ padding: '2.5rem', borderColor: 'rgba(57,255,20,0.3)' }}>
+      <div id="partner-form" className="warning-stripe panel" style={{ padding: '2.5rem', borderColor: 'rgba(191,64,255,0.3)', borderRadius: '12px' }}>
         {submitted ? (
           <div style={{ textAlign: 'center', padding: '2rem 0' }}>
             <Check size={40} style={{ color: '#39ff14', margin: '0 auto 1rem' }} />
-            <h3 style={{ color: '#39ff14', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.75rem' }}>Message Received!</h3>
-            <p style={{ color: '#7ab87a', lineHeight: 1.7 }}>
-              Thanks, <strong style={{ color: '#c8f5c2' }}>{partnerForm.contactName}</strong>! We&apos;ll reach out to <strong style={{ color: '#c8f5c2' }}>{partnerForm.email}</strong> within 2 business days to discuss how we can partner with <strong style={{ color: '#c8f5c2' }}>{partnerForm.orgName}</strong>.
+            <h3 style={{ color: '#bf40ff', fontSize: '1.4rem', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", marginBottom: '0.75rem' }}>Message Received!</h3>
+            <p style={{ color: '#8a8a9a', lineHeight: 1.7 }}>
+              Thanks, <strong style={{ color: '#e8e6e3' }}>{partnerForm.contactName}</strong>! We&apos;ll reach out to <strong style={{ color: '#e8e6e3' }}>{partnerForm.email}</strong> within 2 business days to discuss how we can partner with <strong style={{ color: '#e8e6e3' }}>{partnerForm.orgName}</strong>.
             </p>
           </div>
         ) : (
           <>
             <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-              <div className="rad-badge" style={{ marginBottom: '1rem' }}>☢ Partnership Inquiry</div>
-              <h3 style={{ color: '#39ff14', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.5rem' }}>
+              <div className="rad-badge" style={{ marginBottom: '1rem' }}>✦ Partnership Inquiry</div>
+              <h3 className="gradient-text" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.5rem' }}>
                 Let&apos;s Build Something Together
               </h3>
-              <p style={{ color: '#7ab87a', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '550px', margin: '0 auto' }}>
+              <p style={{ color: '#8a8a9a', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '550px', margin: '0 auto' }}>
                 Whether you represent a school, church, youth group, or community org — we want to hear from you.
                 All programs are tailored to your group&apos;s needs.
               </p>
@@ -262,7 +262,7 @@ export default function CommunityPage() {
                 { name: 'groupSize', label: 'Estimated Group Size', type: 'number', placeholder: '15' },
               ].map(field => (
                 <div key={field.name}>
-                  <label style={{ display: 'block', fontSize: '0.75rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
+                  <label style={{ display: 'block', fontSize: '0.75rem', color: '#8a8a9a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
                     {field.label}
                   </label>
                   <input
@@ -272,13 +272,13 @@ export default function CommunityPage() {
                     onChange={handleChange}
                     placeholder={field.placeholder}
                     required={field.name !== 'phone'}
-                    style={{ width: '100%', padding: '0.6rem 0.75rem', fontSize: '0.9rem' }}
+                    style={{ width: '100%', padding: '0.6rem 0.75rem', fontSize: '0.9rem', borderRadius: '12px' }}
                   />
                 </div>
               ))}
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: '#8a8a9a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
                   Organization Type
                 </label>
                 <select
@@ -286,7 +286,7 @@ export default function CommunityPage() {
                   value={partnerForm.orgType}
                   onChange={handleChange}
                   required
-                  style={{ width: '100%', padding: '0.6rem 0.75rem', fontSize: '0.9rem' }}
+                  style={{ width: '100%', padding: '0.6rem 0.75rem', fontSize: '0.9rem', borderRadius: '12px' }}
                 >
                   <option value="">-- Select type --</option>
                   <option value="school">School / Educational Institution</option>
@@ -297,7 +297,7 @@ export default function CommunityPage() {
               </div>
 
               <div style={{ gridColumn: '1 / -1' }}>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: '#7ab87a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: '#8a8a9a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
                   Tell Us About Your Group & Goals
                 </label>
                 <textarea
@@ -307,13 +307,13 @@ export default function CommunityPage() {
                   rows={4}
                   placeholder="What does your group need? What are you hoping gaming can provide? Any special considerations?"
                   required
-                  style={{ width: '100%', padding: '0.6rem 0.75rem', fontSize: '0.9rem', resize: 'vertical' }}
+                  style={{ width: '100%', padding: '0.6rem 0.75rem', fontSize: '0.9rem', resize: 'vertical', borderRadius: '12px' }}
                 />
               </div>
 
               <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center' }}>
                 <button type="submit" className="btn-primary" style={{ minWidth: '200px' }}>
-                  <span>☢ Send Partnership Request</span>
+                  <span>◈ Send Partnership Request</span>
                 </button>
               </div>
             </form>
