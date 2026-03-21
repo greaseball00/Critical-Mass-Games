@@ -230,6 +230,83 @@ export default function CommunityPage() {
         </div>
       </div>
 
+      {/* Online Community */}
+      <div style={{ marginBottom: '4rem' }}>
+        <h2 style={{ color: '#e8e6e3', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", fontSize: '1.4rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+          Join Us Online
+        </h2>
+        <p style={{ color: '#8a8a9a', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.75rem' }}>
+          The Critical Mass community doesn&apos;t stop at the shop door. Connect with fellow players, catch live streams, and stay up to date between sessions.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+
+          {/* Discord */}
+          <div className="panel panel-hover" style={{ padding: '2rem', borderRadius: '12px', borderLeft: '3px solid #5865F2' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#5865F2">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.87 19.87 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z" />
+              </svg>
+              <div>
+                <h3 style={{ color: '#e8e6e3', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", fontSize: '1rem', margin: 0 }}>Discord</h3>
+                <div style={{ color: '#5865F2', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>Critical Mass Games</div>
+              </div>
+            </div>
+            <p style={{ color: '#8a8a9a', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+              Our Discord is the hub for session planning, game-finder matchmaking, event announcements, and community chat. Find your table, recruit your party, or just hang out between sessions.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              {['Event announcements & reminders', 'LFG — find players for your campaign', 'Rules questions & community discussion', 'Exclusive member channels'].map(item => (
+                <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#8a8a9a', fontSize: '0.82rem' }}>
+                  <Check size={12} style={{ color: '#5865F2', flexShrink: 0, marginTop: '3px' }} /> {item}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://discord.gg/uUdfzTds"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              style={{ fontSize: '0.8rem', borderColor: '#5865F2', color: '#5865F2', display: 'inline-block' }}
+            >
+              Join the Server
+            </a>
+          </div>
+
+          {/* Twitch */}
+          <div className="panel panel-hover" style={{ padding: '2rem', borderRadius: '12px', borderLeft: '3px solid #9147FF' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#9147FF">
+                <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z" />
+              </svg>
+              <div>
+                <h3 style={{ color: '#e8e6e3', fontWeight: 700, fontFamily: "'Orbitron', sans-serif", fontSize: '1rem', margin: 0 }}>Twitch</h3>
+                <div style={{ color: '#9147FF', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif" }}>criticalmassgames</div>
+              </div>
+            </div>
+            <p style={{ color: '#8a8a9a', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+              Watch live from the shop — featured campaigns, tournament play, demo nights, and community events streamed directly to you. Can&apos;t make it in person? Pull up a chair from anywhere.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              {['Live campaign & tournament streams', 'Shop event broadcasts', 'Game demos & new release previews', 'VODs of past sessions'].map(item => (
+                <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#8a8a9a', fontSize: '0.82rem' }}>
+                  <Check size={12} style={{ color: '#9147FF', flexShrink: 0, marginTop: '3px' }} /> {item}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://www.twitch.tv/criticalmassgames"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              style={{ fontSize: '0.8rem', borderColor: '#9147FF', color: '#9147FF', display: 'inline-block' }}
+            >
+              Follow on Twitch
+            </a>
+          </div>
+
+        </div>
+      </div>
+
       {/* Partner inquiry form */}
       <div id="partner-form" className="warning-stripe panel" style={{ padding: '2.5rem', borderColor: 'rgba(191,64,255,0.3)', borderRadius: '12px' }}>
         {submitted ? (
