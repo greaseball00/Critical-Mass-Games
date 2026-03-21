@@ -1,22 +1,83 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { Clock, Users, Check, AlertCircle, LogIn, Loader2, X, Shield } from 'lucide-react';
+import { Clock, Users, Check, AlertCircle, LogIn, Loader2 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { useAuth } from '@/context/AuthContext';
 
+// ── Table diagram: top-down line drawing ─────────────────────────────────────
+// aspect = [width, height] in feet (longest side first for landscape orientation)
+// seatCounts = [top, right, bottom, left]
+function TableDiagram({ aspect, seatCounts }: {
+  aspect: [number, number];
+  seatCounts: [number, number, number, number];
+}) {
+  const svgW = 180;
+  const svgH = 130;
+  const seatR = 7;
+  const gap = 6;
+  const maxTW = svgW * 0.58;
+  const maxTH = svgH * 0.58;
+
+  const [aw, ah] = aspect;
+  const scale = Math.min(maxTW / aw, maxTH / ah);
+  const tW = aw * scale;
+  const tH = ah * scale;
+  const tX = (svgW - tW) / 2;
+  const tY = (svgH - tH) / 2;
+
+  const [topCount, rightCount, bottomCount, leftCount] = seatCounts;
+  const seats: [number, number][] = [];
+
+  for (let i = 0; i < topCount; i++)
+    seats.push([tX + (tW / (topCount + 1)) * (i + 1), tY - gap - seatR]);
+  for (let i = 0; i < rightCount; i++)
+    seats.push([tX + tW + gap + seatR, tY + (tH / (rightCount + 1)) * (i + 1)]);
+  for (let i = 0; i < bottomCount; i++)
+    seats.push([tX + (tW / (bottomCount + 1)) * (i + 1), tY + tH + gap + seatR]);
+  for (let i = 0; i < leftCount; i++)
+    seats.push([tX - gap - seatR, tY + (tH / (leftCount + 1)) * (i + 1)]);
+
+  return (
+    <svg
+      viewBox={`0 0 ${svgW} ${svgH}`}
+      style={{ width: '100%', height: '90px', display: 'block' }}
+      aria-hidden="true"
+    >
+      <rect
+        x={tX} y={tY} width={tW} height={tH}
+        fill="rgba(191,64,255,0.07)"
+        stroke="rgba(191,64,255,0.65)"
+        strokeWidth="1.5"
+        rx="2"
+      />
+      {seats.map(([cx, cy], i) => (
+        <circle
+          key={i}
+          cx={cx} cy={cy} r={seatR}
+          fill="rgba(57,255,20,0.07)"
+          stroke="rgba(57,255,20,0.6)"
+          strokeWidth="1.5"
+        />
+      ))}
+    </svg>
+  );
+}
+
+// ── Table data ────────────────────────────────────────────────────────────────
 const tables = [
   {
     id: 1,
     name: 'Table Alpha',
     size: '4ft × 4ft',
     seats: 4,
+    aspect: [4, 4] as [number, number],
+    seatCounts: [1, 1, 1, 1] as [number, number, number, number],
     features: ['Overhead lamp', 'Dice tray', 'Storage cubbies'],
-    status: 'available',
     accommodations: [
-      'Compact layout — ideal for small-party RPGs or intimate card game sessions',
-      'Storage cubbies keep character sheets and gear off the surface during long sessions',
+      'Compact layout — ideal for small-party RPGs or intimate card games',
+      'Storage cubbies keep character sheets off the surface',
     ],
   },
   {
@@ -24,12 +85,12 @@ const tables = [
     name: 'Table Beta',
     size: '4ft × 6ft',
     seats: 6,
+    aspect: [6, 4] as [number, number],
+    seatCounts: [2, 1, 2, 1] as [number, number, number, number],
     features: ['Overhead lamp', 'Dice tray', 'Terrain-ready surface', 'Power strip'],
-    status: 'available',
     accommodations: [
-      'Power strip supports laptops, tablets, and phone charging throughout your session',
-      'Terrain-ready surface accommodates raised miniature bases without tipping',
-      'Great for hybrid play — connect remote players via a tablet at the table',
+      'Power strip for laptops, tablets, and charging',
+      'Terrain-ready surface supports raised miniature bases',
     ],
   },
   {
@@ -37,12 +98,12 @@ const tables = [
     name: 'Table Gamma',
     size: '4ft × 6ft',
     seats: 6,
+    aspect: [6, 4] as [number, number],
+    seatCounts: [2, 1, 2, 1] as [number, number, number, number],
     features: ['Overhead lamp', 'Wet/dry erase surface', 'Grid overlay', 'Power strip'],
-    status: 'occupied',
     accommodations: [
-      'Built-in 1-inch grid overlay for precise tactical combat movement',
-      'Wet/dry erase surface lets the DM sketch dungeons live at the table',
-      'Power strip available for devices',
+      'Built-in 1-inch grid overlay for tactical combat',
+      'Wet/dry erase surface for live dungeon sketching',
     ],
   },
   {
@@ -50,14 +111,14 @@ const tables = [
     name: 'Table Delta',
     size: '5ft × 8ft',
     seats: 8,
+    aspect: [8, 5] as [number, number],
+    seatCounts: [3, 1, 3, 1] as [number, number, number, number],
     features: ['Dual overhead lamps', 'Felt surface', 'Hidden dice wells', 'Terrain rails', 'TV mount'],
-    status: 'available',
     flagship: true,
     accommodations: [
-      'Terrain rails support modular 3D dungeon tile and scatter terrain builds',
-      'Wall-mounted TV for battle map display or streaming to remote players',
-      'Hidden dice wells keep rolls contained during large or chaotic sessions',
-      'Dual overhead lamps eliminate shadow zones across the full 5×8 surface',
+      'Terrain rails for 3D dungeon tile builds',
+      'TV mount for battle maps or remote players',
+      'Hidden dice wells keep rolls contained',
     ],
   },
   {
@@ -65,11 +126,12 @@ const tables = [
     name: 'Table Epsilon',
     size: '4ft × 4ft',
     seats: 4,
+    aspect: [4, 4] as [number, number],
+    seatCounts: [1, 1, 1, 1] as [number, number, number, number],
     features: ['Overhead lamp', 'Dice tray', 'Folding sides'],
-    status: 'reserved',
     accommodations: [
-      'Folding table sides provide full wheelchair clearance on the left side',
-      'Low-profile setup accessible for players using mobility aids or seated scooters',
+      'Folding sides provide wheelchair clearance on the left',
+      'Low-profile setup for mobility aid access',
     ],
   },
   {
@@ -77,15 +139,14 @@ const tables = [
     name: 'Table Zeta',
     size: '6ft × 8ft — Semi-Private',
     seats: 10,
+    aspect: [8, 6] as [number, number],
+    seatCounts: [4, 1, 4, 1] as [number, number, number, number],
     features: ['Acoustic panels', 'Dual lamps', 'Whiteboard wall', 'Power strip', 'Mini-fridge', 'TV mount'],
-    status: 'available',
     flagship: true,
     accommodations: [
-      'Acoustic panels reduce ambient noise — ideal for immersive or emotionally intense sessions',
-      'Full-wall whiteboard for campaign notes, world maps, and live initiative tracking',
-      'Mini-fridge stocked with beverages, included with every reservation',
-      'Wide accessible aisle on both sides for wheelchair and mobility aid access',
-      'Best suited for multi-hour campaigns, private events, or groups of 7–10',
+      'Acoustic panels for immersive or private sessions',
+      'Whiteboard wall for notes, maps, and initiative',
+      'Mini-fridge included with every reservation',
     ],
   },
 ];
@@ -110,17 +171,7 @@ const gameTypes = [
   'Church Group',
 ];
 
-const statusColor: Record<string, string> = {
-  available: '#39ff14',
-  occupied: '#ff4444',
-  reserved: '#ffd700',
-};
-const statusLabel: Record<string, string> = {
-  available: 'Available',
-  occupied: 'In Use',
-  reserved: 'Reserved',
-};
-
+// ── Page ──────────────────────────────────────────────────────────────────────
 export default function BookPage() {
   const { user, loading: authLoading } = useAuth();
   const supabase = createClient();
@@ -130,13 +181,6 @@ export default function BookPage() {
   const [submitted, setSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
-
-  // Table detail modal state
-  const [detailTableId, setDetailTableId] = useState<number | null>(null);
-  const [detailDate, setDetailDate] = useState<string>(new Date().toISOString().split('T')[0]);
-  const [detailSlot, setDetailSlot] = useState<string>('');
-  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
-  const [slotsLoading, setSlotsLoading] = useState(false);
 
   const [form, setForm] = useState({
     date: '',
@@ -148,34 +192,6 @@ export default function BookPage() {
   });
 
   const tableData = tables.find(t => t.id === selectedTable);
-  const detailTable = tables.find(t => t.id === detailTableId);
-
-  // Fetch booked slots when modal opens or date changes
-  useEffect(() => {
-    if (!detailTableId || !detailDate) return;
-    setSlotsLoading(true);
-    supabase
-      .from('bookings')
-      .select('time_slot')
-      .eq('table_id', detailTableId)
-      .eq('date', detailDate)
-      .eq('status', 'confirmed')
-      .then(({ data }) => {
-        setBookedSlots(data?.map((b: { time_slot: string }) => b.time_slot) ?? []);
-        setSlotsLoading(false);
-      });
-  }, [detailTableId, detailDate]);
-
-  const handleReserveFromDetail = () => {
-    setSelectedTable(detailTableId!);
-    setForm(prev => ({
-      ...prev,
-      date: detailDate,
-      ...(detailSlot ? { timeSlot: detailSlot } : {}),
-    }));
-    setDetailTableId(null);
-    setStep(2);
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -212,7 +228,7 @@ export default function BookPage() {
     }
   };
 
-  // ── Auth gate ─────────────────────────────────────────────────────────────
+  // ── Auth gate ───────────────────────────────────────────────────────────────
   if (authLoading) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
@@ -242,7 +258,7 @@ export default function BookPage() {
     );
   }
 
-  // ── Success state ─────────────────────────────────────────────────────────
+  // ── Success state ───────────────────────────────────────────────────────────
   if (submitted) {
     return (
       <div style={{ maxWidth: '600px', margin: '6rem auto', padding: '0 1.5rem', textAlign: 'center' }}>
@@ -270,163 +286,6 @@ export default function BookPage() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '3rem 1.5rem' }}>
-
-      {/* Table detail modal */}
-      {detailTable && (
-        <div
-          style={{ position: 'fixed', inset: 0, background: 'rgba(10,10,15,0.88)', backdropFilter: 'blur(4px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}
-          onClick={() => setDetailTableId(null)}
-        >
-          <div
-            className="panel"
-            style={{ width: '100%', maxWidth: '680px', maxHeight: '90vh', overflowY: 'auto', borderRadius: '12px', border: '1px solid rgba(191,64,255,0.4)', boxShadow: '0 0 50px rgba(191,64,255,0.15)', position: 'relative' }}
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Modal header */}
-            <div style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'sticky', top: 0, background: '#1a1a2e', zIndex: 1, borderBottom: '1px solid rgba(191,64,255,0.15)' }}>
-              <div>
-                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
-                  <h2 style={{ fontFamily: "'Orbitron', sans-serif", color: '#e8e6e3', fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>
-                    {detailTable.name}
-                  </h2>
-                  {(detailTable as { flagship?: boolean }).flagship && (
-                    <span style={{ background: 'linear-gradient(135deg, #39ff14, #bf40ff)', color: '#0a0a0f', padding: '0.1rem 0.5rem', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em' }}>FLAGSHIP</span>
-                  )}
-                  <span style={{ fontSize: '0.7rem', color: statusColor[detailTable.status], border: `1px solid ${statusColor[detailTable.status]}40`, padding: '0.15rem 0.5rem', letterSpacing: '0.08em' }}>
-                    {statusLabel[detailTable.status]}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', gap: '1.25rem' }}>
-                  <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Clock size={11} style={{ color: '#39ff14' }} /> {detailTable.size}
-                  </span>
-                  <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Users size={11} style={{ color: '#39ff14' }} /> Up to {detailTable.seats} players
-                  </span>
-                </div>
-              </div>
-              <button
-                onClick={() => setDetailTableId(null)}
-                style={{ background: 'none', border: '1px solid rgba(191,64,255,0.3)', borderRadius: '6px', color: '#e8e6e3', cursor: 'pointer', padding: '0.35rem 0.5rem', lineHeight: 1, flexShrink: 0 }}
-              >
-                <X size={16} />
-              </button>
-            </div>
-
-            <div style={{ padding: '1.5rem' }}>
-              {/* Features */}
-              <div style={{ marginBottom: '1.75rem' }}>
-                <h3 style={{ fontFamily: "'Orbitron', sans-serif", color: '#bf40ff', fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                  Table Features
-                </h3>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  {detailTable.features.map(f => (
-                    <span key={f} style={{ background: 'rgba(57,255,20,0.07)', border: '1px solid rgba(57,255,20,0.2)', color: '#e8e6e3', fontSize: '0.78rem', padding: '0.25rem 0.65rem', borderRadius: '20px' }}>
-                      {f}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Accommodations */}
-              <div style={{ marginBottom: '1.75rem' }}>
-                <h3 style={{ fontFamily: "'Orbitron', sans-serif", color: '#bf40ff', fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                  Accommodations & Services
-                </h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {detailTable.accommodations.map(a => (
-                    <li key={a} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#8a8a9a', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                      <Shield size={12} style={{ color: '#bf40ff', flexShrink: 0, marginTop: '3px' }} />
-                      {a}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Availability */}
-              <div>
-                <h3 style={{ fontFamily: "'Orbitron', sans-serif", color: '#bf40ff', fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                  Availability
-                </h3>
-                <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ display: 'block', fontSize: '0.72rem', color: '#8a8a9a', letterSpacing: '0.1em', marginBottom: '0.4rem', textTransform: 'uppercase' }}>Select Date</label>
-                  <input
-                    type="date"
-                    value={detailDate}
-                    min={new Date().toISOString().split('T')[0]}
-                    onChange={e => { setDetailDate(e.target.value); setDetailSlot(''); }}
-                    style={{ padding: '0.55rem 0.75rem', fontSize: '0.9rem', width: 'auto' }}
-                  />
-                </div>
-
-                {slotsLoading ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#5a5a6a', fontSize: '0.85rem', padding: '1rem 0' }}>
-                    <Loader2 size={14} className="slow-spin" /> Loading availability…
-                  </div>
-                ) : (
-                  <>
-                    <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.75rem', fontSize: '0.72rem', color: '#5a5a6a' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#39ff14', display: 'inline-block' }} /> Open</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff4444', display: 'inline-block' }} /> Booked</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#bf40ff', display: 'inline-block' }} /> Your selection</span>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(105px, 1fr))', gap: '0.5rem' }}>
-                      {timeSlots.map(slot => {
-                        const isBooked = bookedSlots.includes(slot);
-                        const isChosen = detailSlot === slot;
-                        return (
-                          <button
-                            key={slot}
-                            onClick={() => !isBooked && setDetailSlot(isChosen ? '' : slot)}
-                            disabled={isBooked}
-                            style={{
-                              padding: '0.5rem 0.25rem',
-                              borderRadius: '8px',
-                              fontSize: '0.78rem',
-                              fontFamily: "'Orbitron', sans-serif",
-                              letterSpacing: '0.03em',
-                              cursor: isBooked ? 'not-allowed' : 'pointer',
-                              border: isChosen ? '1px solid #bf40ff' : isBooked ? '1px solid rgba(255,68,68,0.2)' : '1px solid rgba(57,255,20,0.25)',
-                              background: isChosen ? 'rgba(191,64,255,0.15)' : isBooked ? 'rgba(255,68,68,0.04)' : 'rgba(57,255,20,0.05)',
-                              color: isChosen ? '#bf40ff' : isBooked ? '#5a5a6a' : '#e8e6e3',
-                              textDecoration: isBooked ? 'line-through' : 'none',
-                              transition: 'all 0.15s',
-                              textAlign: 'center',
-                            }}
-                          >
-                            {slot}
-                            <div style={{ fontSize: '0.58rem', marginTop: '3px', color: isChosen ? '#bf40ff' : isBooked ? '#ff4444' : '#5a5a6a' }}>
-                              {isChosen ? 'Selected' : isBooked ? 'Booked' : 'Open'}
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Modal footer */}
-            <div style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid rgba(191,64,255,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', bottom: 0, background: '#1a1a2e', gap: '1rem', flexWrap: 'wrap' }}>
-              <div style={{ color: '#8a8a9a', fontSize: '0.8rem' }}>
-                {detailSlot
-                  ? <span>Time selected: <strong style={{ color: '#bf40ff' }}>{detailSlot}</strong> on <strong style={{ color: '#bf40ff' }}>{detailDate}</strong></span>
-                  : <span style={{ color: '#5a5a6a' }}>Pick a slot above, or choose one in the next step.</span>
-                }
-              </div>
-              <div style={{ display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
-                <button className="btn-secondary" onClick={() => setDetailTableId(null)} style={{ fontSize: '0.8rem' }}>
-                  Cancel
-                </button>
-                <button className="btn-primary" onClick={handleReserveFromDetail}>
-                  <span>Reserve This Table →</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Header */}
       <div style={{ marginBottom: '2.5rem' }}>
@@ -460,81 +319,88 @@ export default function BookPage() {
       {/* Step 1: Select table */}
       {step === 1 && (
         <>
-          <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.8rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-            {Object.entries(statusLabel).map(([key, label]) => (
-              <span key={key} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#8a8a9a' }}>
-                <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: statusColor[key], display: 'inline-block' }} />
-                {label}
-              </span>
-            ))}
-          </div>
-          <p style={{ color: '#5a5a6a', fontSize: '0.8rem', marginBottom: '1.5rem', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.05em' }}>
-            Click any available table to see details, check the schedule, and reserve.
-          </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
             {tables.map(table => {
-              const isUnavailable = table.status !== 'available';
               const isSelected = selectedTable === table.id;
               return (
                 <div
                   key={table.id}
-                  onClick={() => !isUnavailable && setDetailTableId(table.id)}
+                  onClick={() => setSelectedTable(table.id)}
                   className="panel"
                   style={{
-                    padding: '1.5rem', borderRadius: '12px',
-                    cursor: isUnavailable ? 'not-allowed' : 'pointer',
-                    opacity: isUnavailable ? 0.5 : 1,
-                    border: isSelected ? '2px solid #bf40ff' : (table as { flagship?: boolean }).flagship ? '1px solid rgba(191,64,255,0.4)' : '1px solid rgba(191,64,255,0.2)',
-                    boxShadow: isSelected ? '0 0 20px rgba(191,64,255,0.4)' : 'none',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    border: isSelected
+                      ? '2px solid #bf40ff'
+                      : (table as { flagship?: boolean }).flagship
+                        ? '1px solid rgba(191,64,255,0.4)'
+                        : '1px solid rgba(191,64,255,0.2)',
+                    boxShadow: isSelected ? '0 0 24px rgba(191,64,255,0.35)' : 'none',
                     transition: 'all 0.2s',
                     position: 'relative',
+                    overflow: 'hidden',
                   }}
                 >
+                  {/* Flagship badge */}
                   {(table as { flagship?: boolean }).flagship && (
-                    <div style={{ position: 'absolute', top: 0, right: 0, background: 'linear-gradient(135deg, #39ff14, #bf40ff)', color: '#0a0a0f', padding: '0.15rem 0.5rem', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em' }}>FLAGSHIP</div>
+                    <div style={{ position: 'absolute', top: 0, right: 0, background: 'linear-gradient(135deg, #39ff14, #bf40ff)', color: '#0a0a0f', padding: '0.15rem 0.5rem', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', zIndex: 1 }}>FLAGSHIP</div>
                   )}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-                    <h3 style={{ fontFamily: "'Orbitron', sans-serif", color: isSelected ? '#bf40ff' : '#e8e6e3', fontWeight: 700, fontSize: '1rem' }}>{table.name}</h3>
-                    <span style={{ fontSize: '0.7rem', color: statusColor[table.status], border: `1px solid ${statusColor[table.status]}40`, padding: '0.15rem 0.4rem', letterSpacing: '0.08em' }}>
-                      {statusLabel[table.status]}
-                    </span>
+
+                  {/* Diagram */}
+                  <div style={{ borderBottom: '1px solid rgba(191,64,255,0.12)', padding: '0.5rem 0.25rem 0' }}>
+                    <TableDiagram aspect={table.aspect} seatCounts={table.seatCounts} />
                   </div>
-                  <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.75rem' }}>
-                    <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <Clock size={11} style={{ color: '#39ff14' }} /> {table.size}
-                    </span>
-                    <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <Users size={11} style={{ color: '#39ff14' }} /> Up to {table.seats}
-                    </span>
-                  </div>
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                    {table.features.map(f => (
-                      <li key={f} style={{ fontSize: '0.78rem', color: '#8a8a9a', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        <span style={{ color: '#39ff14', fontSize: '0.6rem' }}>▸</span> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  {!isUnavailable && (
-                    <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(191,64,255,0.15)', color: '#5a5a6a', fontSize: '0.75rem', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.08em' }}>
-                      {isSelected ? <span style={{ color: '#bf40ff', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Check size={12} /> Selected</span> : 'Click to view & reserve →'}
+
+                  {/* Info */}
+                  <div style={{ padding: '1.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.6rem' }}>
+                      <h3 style={{ fontFamily: "'Orbitron', sans-serif", color: isSelected ? '#bf40ff' : '#e8e6e3', fontWeight: 700, fontSize: '1rem', margin: 0 }}>
+                        {table.name}
+                      </h3>
                     </div>
-                  )}
+
+                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.85rem' }}>
+                      <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <Clock size={11} style={{ color: '#39ff14' }} /> {table.size}
+                      </span>
+                      <span style={{ color: '#8a8a9a', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <Users size={11} style={{ color: '#39ff14' }} /> Up to {table.seats}
+                      </span>
+                    </div>
+
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 0.75rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                      {table.features.map(f => (
+                        <li key={f} style={{ fontSize: '0.78rem', color: '#8a8a9a', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                          <span style={{ color: '#39ff14', fontSize: '0.6rem' }}>▸</span> {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div style={{ borderTop: '1px solid rgba(191,64,255,0.1)', paddingTop: '0.65rem' }}>
+                      {isSelected
+                        ? <span style={{ color: '#bf40ff', fontSize: '0.78rem', fontFamily: "'Orbitron', sans-serif", display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Check size={12} /> Selected</span>
+                        : <span style={{ color: '#5a5a6a', fontSize: '0.72rem', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.06em' }}>Click to select</span>
+                      }
+                    </div>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          {selectedTable && (
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
-              <button className="btn-primary" onClick={() => setStep(2)}>
-                <span>Continue with {tableData?.name} →</span>
-              </button>
-            </div>
-          )}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3rem' }}>
+            <button
+              className="btn-primary"
+              disabled={!selectedTable}
+              onClick={() => setStep(2)}
+              style={{ opacity: selectedTable ? 1 : 0.35, cursor: selectedTable ? 'pointer' : 'not-allowed' }}
+            >
+              <span>Continue with {tableData ? tableData.name : 'a table'} →</span>
+            </button>
+          </div>
 
           {/* Info strip */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '3rem', borderTop: '1px solid rgba(191,64,255,0.1)', paddingTop: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', borderTop: '1px solid rgba(191,64,255,0.1)', paddingTop: '2rem' }}>
             {[
               { title: 'Free Reservations', body: 'No deposit required. Just show up and roll.' },
               { title: 'Walk-ins Welcome', body: 'Tables available on a first-come basis when not reserved.' },
