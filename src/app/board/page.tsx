@@ -37,7 +37,8 @@ export default function BoardPage() {
       .from('posts')
       .select('*, profiles(username, full_name)')
       .order('created_at', { ascending: false });
-    if (!error && data) setPosts(data as PostWithProfile[]);
+    if (error) setError(error.message);
+    else if (data) setPosts(data as PostWithProfile[]);
     setLoadingPosts(false);
   };
 

@@ -135,7 +135,7 @@ create policy "Users can remove their own event signups"
 -- ============================================================
 create table if not exists public.posts (
   id         uuid default gen_random_uuid() primary key,
-  user_id    uuid references auth.users(id) on delete cascade not null,
+  user_id    uuid references public.profiles(id) on delete cascade not null,
   title      text not null check (char_length(title) between 3 and 120),
   content    text not null check (char_length(content) between 10 and 2000),
   created_at timestamptz default now() not null,
