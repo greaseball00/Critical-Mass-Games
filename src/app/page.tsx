@@ -153,11 +153,6 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Scroll indicator */}
-        <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
-          <div style={{ color: '#5a5a6a', fontSize: '0.6rem', letterSpacing: '2px', fontFamily: "'Orbitron', sans-serif" }}>SCROLL</div>
-          <div className="pulse" style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, rgba(191,64,255,0.6), transparent)' }} />
-        </div>
       </section>
 
       {/* Feature cards */}
