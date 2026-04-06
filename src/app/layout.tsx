@@ -26,7 +26,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ParticleBackground />
-        <div className="arcane-circle" />
         <AuthProvider>
           <div style={{ position: 'relative', zIndex: 1 }}>
             <div style={{
